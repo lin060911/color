@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>颜色视觉分辨测试</title>
+    <title>色彩大师</title>
     <style>
         * {
             margin: 0;
@@ -991,19 +991,18 @@
 <body>
     <div class="container">
         <header>
-            <h1>颜色视觉分辨测试🌈</h1>
-            <p class="subtitle">难度会慢慢提升，试试你能拿多少分吧ヾ(≧▽≦*)o</p>
-            <p class="subtitle">在下方难度设置里试试第45阶：《返璞归真》</p>
+            <h1>色彩大师🌈</h1>
+            <p class="subtitle">找出不同的那一个色块，难度会慢慢提升，试试你能拿多少分吧ヾ(≧▽≦*)o</p>
         </header>
         
         <div class="switch-container">
             <div class="switch-group">
-                <div class="switch-option active" id="lightTheme">🌞 浅色</div>
-                <div class="switch-option" id="darkTheme">🌙 深色</div>
+                <div class="switch-option active" id="lightTheme">🌞 开灯</div>
+                <div class="switch-option" id="darkTheme">🌙 关灯</div>
             </div>
             <div class="switch-group">
-                <div class="switch-option active" id="normalMode">☺️ 经典</div>
-                <div class="switch-option" id="timeMode">⏱️ 限时</div>
+                <div class="switch-option active" id="normalMode">☺️ 经典模式</div>
+                <div class="switch-option" id="timeMode">⏱️ 限时模式</div>
             </div>
         </div>
         
@@ -1151,12 +1150,13 @@
         </div>
         
         <div class="instructions">
-            <h3>游戏规则<(￣︶￣)↗</h3>
+            <h3>ℹ️游戏规则<(￣︶￣)↘</h3>
             <ul>
                 <li><strong>经典模式</strong>：找到网格中颜色不同的色块并点击，每正确3次进入下一阶段，难度提升，得分倍率提升，选择错误则游戏结束</li>
-                <li><strong>限时模式</strong>：在限定时间内尽可能多地找出不同色块，每正确一次得分，超时或选错则结束，按得分/秒统计成绩</li>
-                <li>可以通过拖动条选择初始难度，最高50级，点击"应用设置"生效</li>
-                <li>点击上方按钮可切换浅色/深色模式</li>
+                <li><strong>限时模式</strong>：在限定时间内尽可能多地找出不同色块,时间耗尽或选错则结束，按[得分/秒]计入成绩</li>
+                <li>可以通过拖动条选择初始难度,最高50级,限时模式还可调节时长,<strong>记得点击"应用设置"</strong></li>
+                <li>点击页面最上方按钮可切换浅色/深色模式,经典模式/限时模式</li>
+                <li>难度45级开始为《返璞归真》,在最少的色块里,挑战极致辨识能力</li>
                 <li><strong>作者：</strong>L1Nzy <strong> 邮箱：</strong>lin060911@qq.com</li>
             </ul>
         </div>
@@ -1234,17 +1234,17 @@
             { stage: 37, gridSize: 8, colorDiff: 5.9, shape: 'round-square', shapeRadius: 18, difficultyType: '形状变化' },
             { stage: 38, gridSize: 8, colorDiff: 5.8, shape: 'round-square', shapeRadius: 20, difficultyType: '形状变化' },
             { stage: 39, gridSize: 8, colorDiff: 5.7, shape: 'round-square', shapeRadius: 22, difficultyType: '形状变化' },
-            { stage: 40, gridSize: 9, colorDiff: 5.6, shape: 'circle', shapeRadius: 50, difficultyType: '网格增大' },
-            { stage: 41, gridSize: 9, colorDiff: 5.5, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
-            { stage: 42, gridSize: 9, colorDiff: 5.4, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
-            { stage: 43, gridSize: 9, colorDiff: 5.3, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
-            { stage: 44, gridSize: 9, colorDiff: 5.2, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 40, gridSize: 8, colorDiff: 5.6, shape: 'circle', shapeRadius: 50, difficultyType: '形状变化' },
+            { stage: 41, gridSize: 8, colorDiff: 5.5, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 42, gridSize: 8, colorDiff: 5.4, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 43, gridSize: 8, colorDiff: 5.3, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 44, gridSize: 8, colorDiff: 5.2, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
             { stage: 45, gridSize: 2, colorDiff: 2.8, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
             { stage: 46, gridSize: 2, colorDiff: 2.6, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
             { stage: 47, gridSize: 2, colorDiff: 2.5, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
             { stage: 48, gridSize: 2, colorDiff: 2.4, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
             { stage: 49, gridSize: 2, colorDiff: 2.3, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
-            { stage: 50, gridSize: 2, colorDiff: 2.2, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' }
+            { stage: 50, gridSize: 4, colorDiff: 2.2, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' }
 
         ];
 
@@ -1256,9 +1256,9 @@
             21: 3.0, 22: 3.1, 23: 3.2, 24: 3.3, 25: 3.4,
             26: 3.5, 27: 3.6, 28: 3.7, 29: 3.8, 30: 3.9,
             31: 4.0, 32: 4.1, 33: 4.2, 34: 4.3, 35: 4.4,
-            36: 4.5, 37: 4.6, 38: 4.7, 39: 4.8, 40: 5.0,
-            41: 5.1, 42: 5.2, 43: 5.3, 44: 5.4, 45: 5.5,
-            46: 5.6, 47: 5.7, 48: 5.8, 49: 5.9, 50: 6.0,
+            36: 4.5, 37: 4.6, 38: 4.7, 39: 4.8, 40: 4.9,
+            41: 5.0, 42: 5.2, 43: 5.4, 44: 5.6, 45: 6.0,
+            46: 6.2, 47: 6.4, 48: 6.6, 49: 6.8, 50: 7.0,
         };
 
         const colorSensitivityWeights = {
@@ -2011,13 +2011,13 @@
             if (reason === 'incorrect') {
                 if (gameState.isTimeMode) {
                     const scorePerSecond = (gameState.score / gameState.timeLimit).toFixed(2);
-                    showMessage(`错误！本次得分: ${gameState.score} (${scorePerSecond}分/秒) 历史最高: ${gameState.timeModeHighScore.toFixed(2)}分/秒`, 'time-up');
+                    showMessage(`〒▽〒错误！本次得分: ${gameState.score} (${scorePerSecond}分/秒) 历史最高: ${gameState.timeModeHighScore.toFixed(2)}分/秒`, 'time-up');
                 } else {
-                    showMessage(`游戏结束！本次得分: ${gameState.score} 历史最高: ${gameState.highScore}分`, 'game-over');
+                    showMessage(`〒▽〒游戏结束！本次得分: ${gameState.score} 历史最高: ${gameState.highScore}分`, 'game-over');
                 }
             } else if (reason === 'timeup') {
                 const scorePerSecond = (gameState.score / gameState.timeLimit).toFixed(2);
-                showMessage(`时间到！本次得分: ${gameState.score} (${scorePerSecond}分/秒) 历史最高: ${gameState.timeModeHighScore.toFixed(2)}分/秒`, 'time-up');
+                showMessage(`(～o￣3￣)～时间到！本次得分: ${gameState.score} (${scorePerSecond}分/秒) 历史最高: ${gameState.timeModeHighScore.toFixed(2)}分/秒`, 'time-up');
             } else if (reason === 'giveup') {
                 if (gameState.isTimeMode) {
                     const scorePerSecond = (gameState.score / (gameState.timeLimit - gameState.timeLeft)).toFixed(2);
@@ -2063,7 +2063,7 @@
             }
             
             updateUI();
-            showMessage('点击[开始游戏]', '');
+            showMessage('第一次游玩先看下方[游戏规则]哦(≧∇≦)ﾉ', '');
             colorGrid.innerHTML = '';
             
             startBtn.textContent = '开始游戏';
