@@ -993,6 +993,7 @@
         <header>
             <h1>颜色视觉分辨测试🌈</h1>
             <p class="subtitle">难度会慢慢提升，试试你能拿多少分吧ヾ(≧▽≦*)o</p>
+            <p class="subtitle">在下方难度设置里试试第50阶：《返璞归真》</p>
         </header>
         
         <div class="switch-container">
@@ -1076,17 +1077,19 @@
                 <div class="difficulty-display" id="selectedDifficultyDisplay">1 级</div>
                 
                 <div class="difficulty-slider-container">
-                    <input type="range" min="1" max="40" value="1" class="difficulty-slider" id="difficultySlider">
+                    <input type="range" min="1" max="50" value="1" class="difficulty-slider" id="difficultySlider">
                     <div class="slider-marks">
                         <span class="slider-mark active" data-value="1">1</span>
                         <span class="slider-mark" data-value="5">5</span>
-                        <span class="slider-mark" data-value="10">10</span>
+                        <span class="slider-mark" data-value="10"><strong>10</strong></span>
                         <span class="slider-mark" data-value="15">15</span>
-                        <span class="slider-mark" data-value="20">20</span>
+                        <span class="slider-mark" data-value="20"><strong>20</strong></span>
                         <span class="slider-mark" data-value="25">25</span>
-                        <span class="slider-mark" data-value="30">30</span>
+                        <span class="slider-mark" data-value="30"><strong>30</strong></span>
                         <span class="slider-mark" data-value="35">35</span>
-                        <span class="slider-mark" data-value="40">40</span>
+                        <span class="slider-mark" data-value="40"><strong>40</strong></span>
+                        <span class="slider-mark" data-value="45">45</span>
+                        <span class="slider-mark" data-value="50"><strong>50</strong></span>
                     </div>
                 </div>
                 
@@ -1231,7 +1234,17 @@
             { stage: 37, gridSize: 13, colorDiff: 6.4, shape: 'round-square', shapeRadius: 18, difficultyType: '综合提升' },
             { stage: 38, gridSize: 14, colorDiff: 6.3, shape: 'round-square', shapeRadius: 20, difficultyType: '综合提升' },
             { stage: 39, gridSize: 14, colorDiff: 6.2, shape: 'round-square', shapeRadius: 22, difficultyType: '综合提升' },
-            { stage: 40, gridSize: 15, colorDiff: 6.0, shape: 'circle', shapeRadius: 50, difficultyType: '终极挑战' }
+            { stage: 40, gridSize: 15, colorDiff: 6.1, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 41, gridSize: 15, colorDiff: 5.9, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 42, gridSize: 15, colorDiff: 5.8, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 43, gridSize: 15, colorDiff: 5.7, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 44, gridSize: 15, colorDiff: 5.6, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 45, gridSize: 15, colorDiff: 5.5, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 46, gridSize: 15, colorDiff: 5.4, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 48, gridSize: 15, colorDiff: 5.2, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 49, gridSize: 15, colorDiff: 5.1, shape: 'circle', shapeRadius: 50, difficultyType: '终极挑战' },
+            { stage: 50, gridSize: 2, colorDiff: 2.5, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' }
+
         ];
 
         const multiplierByStage = {
@@ -1243,6 +1256,8 @@
             26: 3.5, 27: 3.6, 28: 3.7, 29: 3.8, 30: 3.9,
             31: 4.0, 32: 4.1, 33: 4.2, 34: 4.3, 35: 4.4,
             36: 4.5, 37: 4.6, 38: 4.7, 39: 4.8, 40: 5.0,
+            41: 5.1, 42: 5.2, 43: 5.3, 44: 5.4, 45: 5.5,
+            46: 5.6, 47: 5.7, 48: 5.8, 49: 5.9, 50: 6.0,
         };
 
         const colorSensitivityWeights = {
@@ -1834,7 +1849,7 @@
                     }, 400);
                 } else {
                     if (gameState.correctInStage >= 5) {
-                        gameState.currentStage = Math.min(gameState.currentStage + 1, 40);
+                        gameState.currentStage = Math.min(gameState.currentStage + 1, 50);
                         gameState.correctInStage = 0;
                         
                         const newDifficulty = difficultyCurve.find(s => s.stage === gameState.currentStage) || difficultyCurve[difficultyCurve.length - 1];
@@ -1877,7 +1892,7 @@
                 previewShape.textContent = '正方形';
             }
             
-            const progressPercent = (stage / 40) * 100;
+            const progressPercent = (stage / 50) * 100;
             difficultyProgress.style.width = `${progressPercent}%`;
             
             selectedDifficultyDisplay.textContent = `${stage} 级`;
@@ -1894,13 +1909,15 @@
             previewTime.textContent = `${seconds}秒`;
             
             if (seconds <= 30) {
-                previewTimeTarget.textContent = '极速挑战';
+                previewTimeTarget.textContent = '极限速度';
             } else if (seconds <= 60) {
-                previewTimeTarget.textContent = '快速反应';
+                previewTimeTarget.textContent = '保持速度';
             } else if (seconds <= 180) {
-                previewTimeTarget.textContent = '中等难度';
+                previewTimeTarget.textContent = '节奏控制';
+            } else if (seconds <= 240) {
+                previewTimeTarget.textContent = '耐力挑战';
             } else {
-                previewTimeTarget.textContent = '持久耐力';
+                previewTimeTarget.textContent = '意志挑战';
             }
             
             const timeMarks = document.querySelectorAll('.time-mark');
@@ -1964,7 +1981,7 @@
             if (stage <= 10) return '简单';
             if (stage <= 20) return '中等';
             if (stage <= 30) return '困难';
-            if (stage <= 35) return '专家';
+            if (stage <= 40) return '专家';
             return '大师';
         }
         
