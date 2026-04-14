@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>颜色视觉分辨测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'PingFang SC', 'Microsoft kaiti', sans-serif;
+        }
+        
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --text-color-light: #718096;
+            --primary-color: #4299e1;
+            --secondary-color: #38b2ac;
+            --success-color: #38a169;
+            --error-color: #e53e3e;
+            --warning-color: #f68e38;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --progress-bg: #e2e8f0;
+            --particle-color: #4299e1;
+        }
+        
+        .dark-theme {
+            --bg-color: #121826;
+            --card-bg: #1e293b;
+            --text-color: #e2e8f0;
+            --text-color-light: #94a3b8;
+            --primary-color: #60a5fa;
+            --secondary-color: #5eead4;
+            --success-color: #34d399;
+            --error-color: #f87171;
+            --warning-color: #fb923c;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --progress-bg: #334155;
+            --particle-color: #60a5fa;
+        }
+        
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 16px;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+        
+        .subtitle {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            color: var(--text-color-light);
+            font-weight: 400;
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            gap: 12px;
+        }
+        
+        .info-box {
+            text-align: center;
+            flex: 1;
+            min-width: 80px;
+        }
+        
+        .info-label {
+            font-size: 0.7rem;
+            color: var(--text-color-light);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-value {
+            font-size: clamp(1.1rem, 3vw, 1.8rem);
+            font-weight: 600;
+            color: var(--text-color);
+            line-height: 1.2;
+        }
+        
+        .info-value-small {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            font-weight: 600;
+            color: var(--text-color);
+            line-height: 1.2;
+        }
+        
+        .info-detail {
+            font-size: 0.7rem;
+            color: var(--text-color-light);
+            margin-top: 2px;
+        }
+        
+        .stage-progress {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 12px 0 16px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--progress-bg);
+            height: 12px;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            width: 0%;
+            transition: width 0.9s ease;
+            border-radius: 40px;
+        }
+        
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            text-align: center;
+            font-size: 0.6rem;
+            line-height: 12px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .timer-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 8px auto 16px;
+            position: relative;
+        }
+        
+        .timer-bar {
+            width: 100%;
+            max-width: 500px;
+            height: 12px;
+            background: var(--progress-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .timer-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffaa65 0%, #ff6c6c 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 40px;
+        }
+        
+        .timer-text {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            text-align: center;
+            font-size: 0.6rem;
+            line-height: 12px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .difficulty-info {
+            display: flex;
+            justify-content: center;
+            gap: clamp(16px, 4vw, 30px);
+            margin: 12px 0 16px;
+            flex-wrap: wrap;
+        }
+        
+        .difficulty-item {
+            text-align: center;
+            flex: 1;
+            max-width: 100px;
+        }
+        
+        .shape-preview {
+            width: 36px;
+            height: 36px;
+            margin: 8px auto;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .color-grid-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px var(--shadow-color);
+            width: 100%;
+            min-height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .color-grid {
+            display: grid;
+            gap: 4px;
+            transition: all 0.3s ease;
+            justify-items: center;
+            align-items: center;
+        }
+        
+        .color-cell {
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid var(--border-color);
+            touch-action: manipulation;
+            user-select: none;
+            transform-origin: center;
+        }
+        
+        .color-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .color-cell:active {
+            transform: scale(0.95);
+        }
+        
+        .color-cell.correct {
+            animation: correctAnimation 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        .color-cell.incorrect {
+            animation: incorrectAnimation 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        .color-cell.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            width: 100%;
+            padding: 6px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-width: 100px;
+            flex: 1;
+            max-width: 180px;
+            user-select: none;
+        }
+        
+        #startBtn {
+            background: linear-gradient(90deg, #6fd055 0%, #5ba2ba 100%);
+            color: white;
+        }
+        
+        #giveupBtn {
+            background: linear-gradient(90deg, #f68e38 0%, #f04747 100%);
+            color: white;
+        }
+        
+        .theme-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .apply-btn {
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .message {
+            text-align: center;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            min-height: 24px;
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .correct {
+            background: rgba(72, 187, 120, 0.1);
+            color: var(--success-color);
+        }
+        
+        .incorrect {
+            background: rgba(229, 62, 62, 0.1);
+            color: var(--error-color);
+        }
+        
+        .stage-up {
+            background: rgba(66, 153, 225, 0.1);
+            color: var(--primary-color);
+            animation: pulse 1s infinite;
+        }
+        
+        .loading {
+            background: rgba(66, 153, 225, 0.05);
+            color: var(--primary-color);
+        }
+        
+        .game-over {
+            background: rgba(229, 62, 62, 0.1);
+            color: var(--error-color);
+        }
+        
+        .time-up {
+            background: rgba(229, 62, 62, 0.1);
+            color: var(--error-color);
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes correctAnimation {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.1) rotate(5deg); }
+            60% { transform: scale(1.05) rotate(-5deg); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes incorrectAnimation {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.1) rotate(3deg); }
+            40% { transform: scale(1.1) rotate(-3deg); }
+            60% { transform: scale(1.1) rotate(3deg); }
+            80% { transform: scale(1.1) rotate(-3deg); }
+            100% { transform: scale(1); }
+        }
+        
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+        }
+        
+        .theme-toggle-container {
+            display: flex;
+            justify-content: center;
+            margin: 8px 0 12px;
+        }
+        
+        .theme-toggle {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        
+        .theme-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 80px;
+            font-size: 0.85rem;
+        }
+        
+        .theme-option.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .game-mode-container {
+            display: flex;
+            justify-content: center;
+            margin: 8px 0 12px;
+        }
+        
+        .game-mode {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        
+        .mode-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 80px;
+            font-size: 0.85rem;
+        }
+        
+        .mode-option.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .switch-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 8px 0 12px;
+        }
+        
+        .switch-group {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        
+        .switch-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 70px;
+            font-size: 0.8rem;
+        }
+        
+        .switch-option.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .game-over-panel {
+            text-align: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-top: 16px;
+            width: 100%;
+            box-shadow: 0 2px 12px var(--shadow-color);
+        }
+        
+        .game-over-panel h2 {
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            margin-bottom: 12px;
+            color: var(--error-color);
+            font-weight: 700;
+        }
+        
+        .final-score {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            color: var(--text-color);
+            margin: 12px 0;
+            letter-spacing: -0.02em;
+        }
+        
+        .score-detail {
+            font-size: 1.1rem;
+            color: var(--text-color-light);
+            margin: 6px 0;
+        }
+        
+        .initial-difficulty {
+            margin: 16px 0;
+            padding: 16px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px var(--shadow-color);
+            width: 100%;
+        }
+        
+        .difficulty-selector {
+            margin: 12px 0;
+        }
+        
+        .difficulty-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 12px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        
+        .difficulty-title::before {
+            content: "🎮";
+            font-size: 16px;
+        }
+        
+        .difficulty-slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 16px;
+        }
+        
+        .difficulty-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--progress-bg);
+            outline: none;
+            margin: 16px 0;
+            position: relative;
+        }
+        
+        .difficulty-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .difficulty-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+        }
+        
+        .difficulty-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .difficulty-slider::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+        }
+        
+        .slider-marks {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: -12px;
+            padding: 0 8px;
+        }
+        
+        .slider-mark {
+            font-size: 0.6rem;
+            color: var(--text-color-light);
+            position: relative;
+            transform: translateX(-50%);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .slider-mark.active {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .difficulty-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 4px 0 16px;
+            text-align: center;
+        }
+        
+        .difficulty-preview {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            padding: 16px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .difficulty-preview-item {
+            text-align: center;
+            min-width: 80px;
+            flex: 1;
+        }
+        
+        .difficulty-preview-label {
+            font-size: 0.75rem;
+            color: var(--text-color-light);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        .difficulty-preview-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .apply-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        
+        #applySettingsBtn {
+            min-width: 140px;
+            max-width: 200px;
+        }
+        
+        .instructions {
+            max-width: 600px;
+            margin: 16px auto;
+            padding: 12px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            width: 100%;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        
+        .instructions h3 {
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .instructions ul {
+            padding-left: 18px;
+            color: var(--text-color-light);
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .high-score {
+            color: var(--error-color);
+            font-weight: 700;
+        }
+        
+        .high-score-detail {
+            color:#ffb300;
+            font-weight: 600;
+        }
+        
+        .score-display {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .time-settings {
+            margin-top: 16px;
+            padding: 16px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px var(--shadow-color);
+        }
+        
+        .time-slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 16px;
+        }
+        
+        .time-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--progress-bg);
+            outline: none;
+            margin: 16px 0;
+            position: relative;
+        }
+        
+        .time-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f68e38;
+            cursor: pointer;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 2px 8px rgba(246, 142, 56, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .time-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(246, 142, 56, 0.4);
+        }
+        
+        .time-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f68e38;
+            cursor: pointer;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 2px 8px rgba(246, 142, 56, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .time-slider::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(246, 142, 56, 0.4);
+        }
+        
+        .time-marks {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: -12px;
+            padding: 0 8px;
+        }
+        
+        .time-mark {
+            font-size: 0.6rem;
+            color: var(--text-color-light);
+            position: relative;
+            transform: translateX(-50%);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .time-mark.active {
+            color: #f68e38;
+            font-weight: 500;
+        }
+        
+        .time-display {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #f68e38;
+            margin: 4px 0 16px;
+            text-align: center;
+        }
+        
+        .time-preview {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+            padding: 16px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .time-preview-item {
+            text-align: center;
+            min-width: 80px;
+            flex: 1;
+        }
+        
+        .time-preview-label {
+            font-size: 0.75rem;
+            color: var(--text-color-light);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        .time-preview-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .time-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #f68e38 0%, #f04747 100%);
+            width: 0%;
+            border-radius: 40px;
+        }
+        
+        .time-progress-text {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            text-align: center;
+            font-size: 0.6rem;
+            line-height: 10px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .time-mode-only {
+            display: none;
+        }
+        
+        .timer-container.time-mode-only {
+            display: none;
+        }
+        
+        .time-mode-active .timer-container.time-mode-only {
+            display: block;
+        }
+        
+        .time-mode-active .time-settings {
+            display: block;
+        }
+        
+        .time-mode-active .time-mode-only {
+            display: block;
+        }
+        
+        .time-mode-active .stage-progress:not(.time-mode-only) {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .game-info {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .color-grid-container {
+                padding: 12px;
+            }
+            
+            .difficulty-preview, .time-preview {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .difficulty-preview-item, .time-preview-item {
+                min-width: 70px;
+            }
+            
+            .difficulty-display, .time-display {
+                font-size: 1.2rem;
+            }
+            
+            .notification {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 6px;
+            }
+            
+            .game-info {
+                padding: 12px;
+            }
+            
+            .color-grid-container {
+                padding: 10px;
+            }
+            
+            .instructions {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+            
+            .initial-difficulty, .time-settings {
+                padding: 12px 10px;
+            }
+            
+            .slider-mark, .time-mark {
+                font-size: 0.5rem;
+            }
+            
+            .difficulty-display, .time-display {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .color-cell {
+                min-width: 30px;
+                min-height: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>颜色视觉分辨测试🌈</h1>
+            <p class="subtitle">难度会慢慢提升，试试你能拿多少分吧ヾ(≧▽≦*)o</p>
+        </header>
+        
+        <div class="switch-container">
+            <div class="switch-group">
+                <div class="switch-option active" id="lightTheme">🌞 浅色</div>
+                <div class="switch-option" id="darkTheme">🌙 深色</div>
+            </div>
+            <div class="switch-group">
+                <div class="switch-option active" id="normalMode">☺️ 经典</div>
+                <div class="switch-option" id="timeMode">⏱️ 限时</div>
+            </div>
+        </div>
+        
+        <div class="game-info">
+            <div class="info-box">
+                <div class="info-label">当前阶段</div>
+                <div id="stage" class="info-value">1</div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-label">分数</div>
+                <div id="score" class="info-value">0</div>
+                <div class="info-detail">倍率: <span id="multiplier">1.0x</span></div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-label">网格</div>
+                <div id="gridSize" class="info-value">2×2</div>
+                <div class="info-detail">色差: ΔE=<span id="colorDiff">15.0</span></div>
+            </div>
+        </div>
+        
+        <div class="stage-progress">
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+                <div class="progress-text">阶段进度: <span id="progressText">0/5</span></div>
+            </div>
+        </div>
+        
+        <div class="timer-container time-mode-only">
+            <div class="timer-bar">
+                <div id="timerFill" class="timer-fill"></div>
+                <div class="timer-text">剩余时间: <span id="timerText">00:30</span></div>
+            </div>
+        </div>
+        
+        <div class="difficulty-info">
+            <div class="difficulty-item">
+                <div class="info-label">形状</div>
+                <div id="shapePreview" class="shape-preview"></div>
+                <div class="info-detail" id="shapeLabel">正方形</div>
+            </div>
+            
+            <div class="difficulty-item">
+                <div class="info-label" id="targetLabel">目标</div>
+                <div id="targetCount" class="info-value">1/5</div>
+                <div class="info-detail" id="targetDetail">进入下一阶段</div>
+            </div>
+            
+            <div class="difficulty-item">
+                <div class="info-label">历史最高</div>
+                <div id="highScore" class="info-value high-score-detail">0.00</div>
+                <div class="info-detail" id="highScoreDetail">经典模式</div>
+            </div>
+        </div>
+        
+        <div class="color-grid-container">
+            <div id="colorGrid" class="color-grid" style="grid-template-columns: repeat(2, 1fr);"></div>
+        </div>
+        
+        <div id="message" class="message"></div>
+        
+        <div class="controls">
+            <button id="startBtn">开始游戏</button>
+            <button id="giveupBtn" disabled>放弃该局</button>
+        </div>
+        
+        <div class="initial-difficulty">
+            <div class="difficulty-selector">
+                <h3 class="difficulty-title">初始难度选择</h3>
+                <div class="difficulty-display" id="selectedDifficultyDisplay">1 级</div>
+                
+                <div class="difficulty-slider-container">
+                    <input type="range" min="1" max="40" value="1" class="difficulty-slider" id="difficultySlider">
+                    <div class="slider-marks">
+                        <span class="slider-mark active" data-value="1">1</span>
+                        <span class="slider-mark" data-value="5">5</span>
+                        <span class="slider-mark" data-value="10">10</span>
+                        <span class="slider-mark" data-value="15">15</span>
+                        <span class="slider-mark" data-value="20">20</span>
+                        <span class="slider-mark" data-value="25">25</span>
+                        <span class="slider-mark" data-value="30">30</span>
+                        <span class="slider-mark" data-value="35">35</span>
+                        <span class="slider-mark" data-value="40">40</span>
+                    </div>
+                </div>
+                
+                <div class="progress-bar-small" id="difficultyProgress"></div>
+                
+                <div class="difficulty-preview">
+                    <div class="difficulty-preview-item">
+                        <div class="difficulty-preview-label">网格大小</div>
+                        <div id="previewGridSize" class="difficulty-preview-value">2×2</div>
+                    </div>
+                    <div class="difficulty-preview-item">
+                        <div class="difficulty-preview-label">色差 ΔE</div>
+                        <div id="previewColorDiff" class="difficulty-preview-value">15.0</div>
+                    </div>
+                    <div class="difficulty-preview-item">
+                        <div class="difficulty-preview-label">得分倍率</div>
+                        <div id="previewMultiplier" class="difficulty-preview-value">1.0x</div>
+                    </div>
+                    <div class="difficulty-preview-item">
+                        <div class="difficulty-preview-label">形状</div>
+                        <div id="previewShape" class="difficulty-preview-value">正方形</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="time-settings" id="timeSettings" style="display: none;">
+                <h3 class="difficulty-title">限时模式设置</h3>
+                <div class="time-display" id="selectedTimeDisplay">30 秒</div>
+                
+                <div class="time-slider-container">
+                    <input type="range" min="30" max="300" value="30" class="time-slider" id="timeSlider">
+                    <div class="time-marks">
+                        <span class="time-mark active" data-value="30">30秒</span>
+                        <span class="time-mark" data-value="120">2分钟</span>                        
+                        <span class="time-mark" data-value="210">3分30秒</span>
+                        <span class="time-mark" data-value="300">5分钟</span>
+                    </div>
+                </div>
+                
+                <div class="time-preview">
+                    <div class="time-preview-item">
+                        <div class="time-preview-label">时间限制</div>
+                        <div id="previewTime" class="time-preview-value">30秒</div>
+                    </div>
+                    <div class="time-preview-item">
+                        <div class="time-preview-label">目标</div>
+                        <div id="previewTimeTarget" class="time-preview-value">尽可能多得分</div>
+                    </div>
+                    <div class="time-preview-item">
+                        <div class="time-preview-label">计分方式</div>
+                        <div id="previewTimeScoring" class="time-preview-value">得分/秒</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="apply-button-container">
+                <button class="apply-btn" id="applySettingsBtn">应用设置</button>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>游戏规则<(￣︶￣)↗</h3>
+            <ul>
+                <li><strong>经典模式</strong>：找到网格中颜色不同的色块并点击，每正确5次进入下一阶段，难度提升，得分倍率提升，选择错误则游戏结束</li>
+                <li><strong>限时模式</strong>：在限定时间内尽可能多地找出不同色块，每正确一次得分，超时或选错则结束，按得分/秒统计成绩</li>
+                <li>可以通过拖动条选择初始难度，最高40级，点击"应用设置"生效</li>
+                <li>点击上方按钮可切换浅色/深色模式</li>
+                <li><strong>作者：</strong>L1Nzy <strong> 邮箱：</strong>lin060911@qq.com</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">设置已应用！</div>
+    <script>
+        const gameState = {
+            isPlaying: false,
+            currentStage: 1,
+            score: 0,
+            correctInStage: 0,
+            totalCorrect: 0,
+            gridSize: 2,
+            colorDiff: 15.0,
+            multiplier: 1.0,
+            differentIndex: -1,
+            baseColor: null,
+            differentColor: null,
+            shape: 'square',
+            isProcessing: false,
+            isClickLocked: false,
+            clickLockTimer: null,
+            debounceTimer: null,
+            initialDifficulty: 1,
+            highScore: localStorage.getItem('colorVisionHighScore') || 0,
+            timeModeHighScore: parseFloat(localStorage.getItem('colorVisionTimeHighScore')) || 0.00,
+            highScoreDetail: localStorage.getItem('colorVisionHighScoreDetail') || '经典模式',
+            timeModeHighScoreDetail: localStorage.getItem('colorVisionTimeHighScoreDetail') || '0.00 分/秒',
+            gameMode: 'classic', 
+            timeLimit: 30, // 秒
+            timeLeft: 30,
+            timer: null,
+            isDarkTheme: localStorage.getItem('colorVisionDarkTheme') === 'true',
+            isTimeMode: localStorage.getItem('colorVisionTimeMode') === 'true'
+        };
+
+        const difficultyCurve = [
+            { stage: 1, gridSize: 2, colorDiff: 15.0, shape: 'square', shapeRadius: 4, difficultyType: '初始难度' },
+            { stage: 2, gridSize: 2, colorDiff: 14.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 3, gridSize: 2, colorDiff: 14.0, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 4, gridSize: 3, colorDiff: 14.0, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 5, gridSize: 3, colorDiff: 13.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 6, gridSize: 3, colorDiff: 13.0, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 7, gridSize: 4, colorDiff: 13.0, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 8, gridSize: 4, colorDiff: 12.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 9, gridSize: 4, colorDiff: 12.0, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 10, gridSize: 5, colorDiff: 12.0, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 11, gridSize: 5, colorDiff: 11.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 12, gridSize: 5, colorDiff: 11.0, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 13, gridSize: 6, colorDiff: 11.0, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 14, gridSize: 6, colorDiff: 10.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 15, gridSize: 6, colorDiff: 10.0, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 16, gridSize: 7, colorDiff: 10.0, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 17, gridSize: 7, colorDiff: 9.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 18, gridSize: 7, colorDiff: 9.0, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 19, gridSize: 8, colorDiff: 9.0, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 20, gridSize: 8, colorDiff: 8.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 21, gridSize: 8, colorDiff: 8.0, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 22, gridSize: 9, colorDiff: 7.8, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 23, gridSize: 9, colorDiff: 7.8, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 24, gridSize: 9, colorDiff: 7.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 25, gridSize: 9, colorDiff: 7.3, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 26, gridSize: 10, colorDiff: 7.3, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 27, gridSize: 10, colorDiff: 7.0, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 28, gridSize: 10, colorDiff: 6.8, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 29, gridSize: 12, colorDiff: 6.8, shape: 'square', shapeRadius: 4, difficultyType: '网格增大' },
+            { stage: 30, gridSize: 12, colorDiff: 6.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
+            { stage: 31, gridSize: 12, colorDiff: 6.5, shape: 'round-square', shapeRadius: 6, difficultyType: '形状变化' },
+            { stage: 32, gridSize: 12, colorDiff: 6.5, shape: 'round-square', shapeRadius: 8, difficultyType: '形状变化' },
+            { stage: 33, gridSize: 12, colorDiff: 6.5, shape: 'round-square', shapeRadius: 10, difficultyType: '形状变化' },
+            { stage: 34, gridSize: 12, colorDiff: 6.5, shape: 'round-square', shapeRadius: 12, difficultyType: '形状变化' },
+            { stage: 35, gridSize: 12, colorDiff: 6.5, shape: 'round-square', shapeRadius: 14, difficultyType: '形状变化' },
+            { stage: 36, gridSize: 13, colorDiff: 6.5, shape: 'round-square', shapeRadius: 16, difficultyType: '形状变化' },
+            { stage: 37, gridSize: 13, colorDiff: 6.4, shape: 'round-square', shapeRadius: 18, difficultyType: '综合提升' },
+            { stage: 38, gridSize: 14, colorDiff: 6.3, shape: 'round-square', shapeRadius: 20, difficultyType: '综合提升' },
+            { stage: 39, gridSize: 14, colorDiff: 6.2, shape: 'round-square', shapeRadius: 22, difficultyType: '综合提升' },
+            { stage: 40, gridSize: 15, colorDiff: 6.0, shape: 'circle', shapeRadius: 50, difficultyType: '终极挑战' }
+        ];
+
+        const multiplierByStage = {
+            1: 1.0, 2: 1.1, 3: 1.2, 4: 1.3, 5: 1.4,
+            6: 1.5, 7: 1.6, 8: 1.7, 9: 1.8, 10: 1.9,
+            11: 2.0, 12: 2.1, 13: 2.2, 14: 2.3, 15: 2.4,
+            16: 2.5, 17: 2.6, 18: 2.7, 19: 2.8, 20: 2.9,
+            21: 3.0, 22: 3.1, 23: 3.2, 24: 3.3, 25: 3.4,
+            26: 3.5, 27: 3.6, 28: 3.7, 29: 3.8, 30: 3.9,
+            31: 4.0, 32: 4.1, 33: 4.2, 34: 4.3, 35: 4.4,
+            36: 4.5, 37: 4.6, 38: 4.7, 39: 4.8, 40: 5.0,
+        };
+
+        const colorSensitivityWeights = {
+            r: 0.299,
+            g: 0.587,
+            b: 0.114
+        };
+
+        const colorGrid = document.getElementById('colorGrid');
+        const stageElement = document.getElementById('stage');
+        const scoreElement = document.getElementById('score');
+        const gridSizeElement = document.getElementById('gridSize');
+        const colorDiffElement = document.getElementById('colorDiff');
+        const multiplierElement = document.getElementById('multiplier');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const targetCountElement = document.getElementById('targetCount');
+        const targetLabelElement = document.getElementById('targetLabel');
+        const targetDetailElement = document.getElementById('targetDetail');
+        const messageElement = document.getElementById('message');
+        const startBtn = document.getElementById('startBtn');
+        const giveupBtn = document.getElementById('giveupBtn');
+        const highScoreElement = document.getElementById('highScore');
+        const highScoreDetailElement = document.getElementById('highScoreDetail');
+        const shapePreview = document.getElementById('shapePreview');
+        const shapeLabel = document.getElementById('shapeLabel');
+        
+        const difficultySlider = document.getElementById('difficultySlider');
+        const selectedDifficultyDisplay = document.getElementById('selectedDifficultyDisplay');
+        const previewGridSize = document.getElementById('previewGridSize');
+        const previewColorDiff = document.getElementById('previewColorDiff');
+        const previewMultiplier = document.getElementById('previewMultiplier');
+        const previewShape = document.getElementById('previewShape');
+        const applySettingsBtn = document.getElementById('applySettingsBtn');
+        const sliderMarks = document.querySelectorAll('.slider-mark');
+        const difficultyProgress = document.getElementById('difficultyProgress');
+        const notification = document.getElementById('notification');
+        
+        const timeSettings = document.getElementById('timeSettings');
+        const timeSlider = document.getElementById('timeSlider');
+        const selectedTimeDisplay = document.getElementById('selectedTimeDisplay');
+        const previewTime = document.getElementById('previewTime');
+        const previewTimeTarget = document.getElementById('previewTimeTarget');
+        const previewTimeScoring = document.getElementById('previewTimeScoring');
+        const timeMarks = document.querySelectorAll('.time-mark');
+        const timerContainer = document.querySelector('.timer-container.time-mode-only');
+        const timerFill = document.getElementById('timerFill');
+        const timerText = document.getElementById('timerText');
+        
+        const normalModeBtn = document.getElementById('normalMode');
+        const timeModeBtn = document.getElementById('timeMode');
+        const lightThemeBtn = document.getElementById('lightTheme');
+        const darkThemeBtn = document.getElementById('darkTheme');
+        
+        const labCache = new Map();
+
+        function initTheme() {
+            if (gameState.isDarkTheme) {
+                document.body.classList.add('dark-theme');
+                darkThemeBtn.classList.add('active');
+                lightThemeBtn.classList.remove('active');
+            } else {
+                document.body.classList.remove('dark-theme');
+                lightThemeBtn.classList.add('active');
+                darkThemeBtn.classList.remove('active');
+            }
+        }
+
+        function initGameMode() {
+            if (gameState.isTimeMode) {
+                document.body.classList.add('time-mode-active');
+                timeModeBtn.classList.add('active');
+                normalModeBtn.classList.remove('active');
+                timeSettings.style.display = 'block';
+                timerContainer.style.display = 'block';
+                targetLabelElement.textContent = '剩余目标';
+                targetDetailElement.textContent = '限时模式';
+                
+                highScoreElement.textContent = gameState.timeModeHighScore.toFixed(2);
+                highScoreDetailElement.textContent = '分/秒';
+            } else {
+                document.body.classList.remove('time-mode-active');
+                normalModeBtn.classList.add('active');
+                timeModeBtn.classList.remove('active');
+                timeSettings.style.display = 'none';
+                timerContainer.style.display = 'none';
+                targetLabelElement.textContent = '目标';
+                targetDetailElement.textContent = '进入下一阶段';
+                
+                highScoreElement.textContent = gameState.highScore;
+                highScoreDetailElement.textContent = gameState.highScoreDetail;
+            }
+        }
+
+        function updateHighScoreDisplay() {
+            if (gameState.isTimeMode) {
+                highScoreElement.textContent = gameState.timeModeHighScore.toFixed(2);
+                highScoreDetailElement.textContent = '分/秒';
+            } else {
+                highScoreElement.textContent = gameState.highScore;
+                highScoreDetailElement.textContent = gameState.highScoreDetail;
+            }
+        }
+        
+        function updateHighScore() {
+            if (gameState.isTimeMode) {
+                const scorePerSecond = (gameState.score / gameState.timeLimit).toFixed(2);
+                const detail = `${scorePerSecond} 分/秒`;
+                
+                if (parseFloat(scorePerSecond) > gameState.timeModeHighScore) {
+                    gameState.timeModeHighScore = parseFloat(scorePerSecond);
+                    gameState.timeModeHighScoreDetail = detail;
+                    localStorage.setItem('colorVisionTimeHighScore', gameState.timeModeHighScore.toFixed(2));
+                    localStorage.setItem('colorVisionTimeHighScoreDetail', gameState.timeModeHighScoreDetail);
+                }
+            } else {
+                if (gameState.score > gameState.highScore) {
+                    gameState.highScore = gameState.score;
+                    const difficultyName = getDifficultyName(gameState.initialDifficulty);
+                    gameState.highScoreDetail = `${difficultyName} 第${gameState.currentStage}阶段`;
+                    localStorage.setItem('colorVisionHighScore', gameState.highScore);
+                    localStorage.setItem('colorVisionHighScoreDetail', gameState.highScoreDetail);
+                }
+            }
+            updateHighScoreDisplay();
+        }
+
+        function ciede2000(Lab1, Lab2) {
+            const L1 = Lab1[0], a1 = Lab1[1], b1 = Lab1[2];
+            const L2 = Lab2[0], a2 = Lab2[1], b2 = Lab2[2];
+
+            const avgL = (L1 + L2) / 2;
+            const C1 = Math.sqrt(a1 * a1 + b1 * b1);
+            const C2 = Math.sqrt(a2 * a2 + b2 * b2);
+            const avgC = (C1 + C2) / 2;
+
+            const G = 0.5 * (1 - Math.sqrt(Math.pow(avgC, 7) / (Math.pow(avgC, 7) + Math.pow(25, 7))));
+            const a1Prime = a1 * (1 + G);
+            const a2Prime = a2 * (1 + G);
+
+            const C1Prime = Math.sqrt(a1Prime * a1Prime + b1 * b1);
+            const C2Prime = Math.sqrt(a2Prime * a2Prime + b2 * b2);
+            const avgCPrime = (C1Prime + C2Prime) / 2;
+
+            let h1Prime = Math.atan2(b1, a1Prime);
+            h1Prime = h1Prime < 0 ? h1Prime + 2 * Math.PI : h1Prime;
+            let h2Prime = Math.atan2(b2, a2Prime);
+            h2Prime = h2Prime < 0 ? h2Prime + 2 * Math.PI : h2Prime;
+
+            const avgHPrime = Math.abs(h1Prime - h2Prime) > Math.PI ? 
+                (h1Prime + h2Prime + 2 * Math.PI) / 2 : (h1Prime + h2Prime) / 2;
+
+            const T = 1 - 0.17 * Math.cos(avgHPrime - Math.PI / 6) + 
+                0.24 * Math.cos(2 * avgHPrime) + 
+                0.32 * Math.cos(3 * avgHPrime + Math.PI / 30) - 
+                0.2 * Math.cos(4 * avgHPrime - 63 * Math.PI / 180);
+
+            let deltaHPrime = h2Prime - h1Prime;
+            if (Math.abs(deltaHPrime) > Math.PI) {
+                deltaHPrime = deltaHPrime > 0 ? deltaHPrime - 2 * Math.PI : deltaHPrime + 2 * Math.PI;
+            }
+
+            const deltaLPrime = L2 - L1;
+            const deltaCPrime = C2Prime - C1Prime;
+            const deltaHPrime2 = 2 * Math.sqrt(C1Prime * C2Prime) * Math.sin(deltaHPrime / 2);
+
+            const S_L = 1 + (0.015 * Math.pow(avgL - 50, 2)) / Math.sqrt(20 + Math.pow(avgL - 50, 2));
+            const S_C = 1 + 0.045 * avgCPrime;
+            const S_H = 1 + 0.015 * avgCPrime * T;
+
+            const deltaTheta = 30 * Math.PI / 180 * Math.exp(-Math.pow((180 / Math.PI * avgHPrime - 275) / 25, 2));
+            const R_C = 2 * Math.sqrt(Math.pow(avgCPrime, 7) / (Math.pow(avgCPrime, 7) + Math.pow(25, 7)));
+            const R_T = -R_C * Math.sin(2 * deltaTheta);
+
+            const deltaE = Math.sqrt(
+                Math.pow(deltaLPrime / S_L, 2) +
+                Math.pow(deltaCPrime / S_C, 2) +
+                Math.pow(deltaHPrime2 / S_H, 2) +
+                R_T * (deltaCPrime / S_C) * (deltaHPrime2 / S_H)
+            );
+
+            return deltaE;
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            return [h, s, l];
+        }
+
+        function hslToRgb(h, s, l) {
+            let r, g, b;
+
+            if (s === 0) {
+                r = g = b = l;
+            } else {
+                const hue2rgb = (p, q, t) => {
+                    if (t < 0) t += 1;
+                    if (t > 1) t -= 1;
+                    if (t < 1/6) return p + (q - p) * 6 * t;
+                    if (t < 1/2) return q;
+                    if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                    return p;
+                };
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+        }
+
+        function getOptimizedBaseColor(difficulty) {
+            const intensity = Math.max(0.2, 1 - (15 - difficulty) / 30);
+            const min = Math.floor(50 * intensity);
+            const max = Math.floor(205 * intensity);
+
+            let r, g, b;
+            do {
+                r = Math.floor(Math.random() * (max - min + 1)) + min;
+                g = Math.floor(Math.random() * (max - min + 1)) + min;
+                b = Math.floor(Math.random() * (max - min + 1)) + min;
+            } while (Math.abs(r - g) < 10 && Math.abs(g - b) < 10 && Math.abs(r - b) < 10);
+
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function generatePreciseContrastColor(baseColor, targetDE) {
+            const baseRgb = parseRgb(baseColor);
+            if (!baseRgb) return getOptimizedBaseColor(targetDE);
+
+            const [baseH, baseS, baseL] = rgbToHsl(baseRgb.r, baseRgb.g, baseRgb.b);
+            const fixedH = Math.max(0, Math.min(1, baseH + (Math.random() - 0.5) * 0.01));
+
+            const stepFactor = Math.max(0.02, targetDE / 50);
+            let bestColor = baseColor;
+            let bestDE = 0;
+            let attempts = 0;
+            const maxAttempts = 20;
+
+            while ((Math.abs(bestDE - targetDE) > targetDE * 0.05) && attempts < maxAttempts) {
+                const sAdjust = (Math.random() - 0.5) * stepFactor * 0.8;
+                const lAdjust = (Math.random() - 0.5) * stepFactor * 1.2;
+                
+                const newS = Math.max(0.15, Math.min(0.85, baseS + sAdjust));
+                const newL = Math.max(0.15, Math.min(0.85, baseL + lAdjust));
+                
+                const [r, g, b] = hslToRgb(fixedH, newS, newL);
+                const testColor = `rgb(${r}, ${g}, ${b})`;
+                const currentDE = calculateDeltaE(baseColor, testColor);
+
+                if (Math.abs(currentDE - targetDE) < Math.abs(bestDE - targetDE)) {
+                    bestDE = currentDE;
+                    bestColor = testColor;
+                }
+                attempts++;
+            }
+
+            return bestColor;
+        }
+
+        function rgbToLab(rgb) {
+            if (labCache.has(rgb)) {
+                return [...labCache.get(rgb)];
+            }
+            
+            const match = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+            if (!match) return [0, 0, 0];
+            
+            let r = parseInt(match[1]) / 255;
+            let g = parseInt(match[2]) / 255;
+            let b = parseInt(match[3]) / 255;
+
+            r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
+            g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
+            b = b > 0.04045 ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
+
+            let x = r * 0.4124564 + g * 0.3575761 + b * 0.1804375;
+            let y = r * 0.2126729 + g * 0.7151522 + b * 0.0721750;
+            let z = r * 0.0193339 + g * 0.1191920 + b * 0.9503041;
+
+            x /= 0.95047;
+            y /= 1.00000;
+            z /= 1.08883;
+
+            x = x > 0.008856 ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
+            y = y > 0.008856 ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
+            z = z > 0.008856 ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
+
+            const L = (116 * y) - 16;
+            const a = 500 * (x - y);
+            const b_channel = 200 * (y - z);
+
+            const lab = [L, a, b_channel];
+            labCache.set(rgb, lab);
+            return lab;
+        }
+
+        function calculateDeltaE(color1, color2) {
+            const lab1 = rgbToLab(color1);
+            const lab2 = rgbToLab(color2);
+            return ciede2000(lab1, lab2);
+        }
+
+        function parseRgb(rgbStr) {
+            const match = rgbStr.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+            if (!match) return null;
+            return {
+                r: parseInt(match[1]),
+                g: parseInt(match[2]),
+                b: parseInt(match[3])
+            };
+        }
+
+        function createParticles(x, y, color, count = 8) {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.position = 'fixed';
+                particle.style.width = '8px';
+                particle.style.height = '8px';
+                particle.style.borderRadius = '50%';
+                particle.style.backgroundColor = color;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.zIndex = '1000';
+                particle.style.pointerEvents = 'none';
+                
+                document.body.appendChild(particle);
+                
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 2 + Math.random() * 3;
+                const distance = 20 + Math.random() * 40;
+                
+                const animation = particle.animate([
+                    { 
+                        transform: 'translate(0, 0) scale(1)',
+                        opacity: 1
+                    },
+                    { 
+                        transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+                        opacity: 0
+                    }
+                ], {
+                    duration: 600 + Math.random() * 400,
+                    easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+                });
+                
+                animation.onfinish = () => {
+                    particle.remove();
+                };
+            }
+        }
+
+        function createScoreAnimation(x, y, score) {
+            const scoreElement = document.createElement('div');
+            scoreElement.textContent = `+${score}`;
+            scoreElement.style.position = 'fixed';
+            scoreElement.style.left = `${x}px`;
+            scoreElement.style.top = `${y}px`;
+            scoreElement.style.color = '#38a169';
+            scoreElement.style.fontWeight = 'bold';
+            scoreElement.style.fontSize = '1.2rem';
+            scoreElement.style.zIndex = '1000';
+            scoreElement.style.pointerEvents = 'none';
+            scoreElement.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
+            
+            document.body.appendChild(scoreElement);
+            
+            const animation = scoreElement.animate([
+                { 
+                    transform: 'translateY(0) scale(1)',
+                    opacity: 1
+                },
+                { 
+                    transform: 'translateY(-40px) scale(1.5)',
+                    opacity: 0
+                }
+            ], {
+                duration: 800,
+                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+            });
+            
+            animation.onfinish = () => {
+                scoreElement.remove();
+            };
+        }
+
+        function lockClick(duration = 800) {
+            gameState.isClickLocked = true;
+            
+            if (gameState.clickLockTimer) {
+                clearTimeout(gameState.clickLockTimer);
+            }
+            
+            const cells = document.querySelectorAll('.color-cell');
+            cells.forEach(cell => cell.classList.add('disabled'));
+            
+            gameState.clickLockTimer = setTimeout(() => {
+                gameState.isClickLocked = false;
+                cells.forEach(cell => cell.classList.remove('disabled'));
+            }, duration);
+        }
+
+        function debounce(func, delay = 200) {
+            return function(...args) {
+                if (gameState.debounceTimer) {
+                    clearTimeout(gameState.debounceTimer);
+                }
+                
+                gameState.debounceTimer = setTimeout(() => {
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+
+        function updateUI() {
+            stageElement.textContent = gameState.currentStage;
+            scoreElement.textContent = gameState.score;
+            gridSizeElement.textContent = `${gameState.gridSize}×${gameState.gridSize}`;
+            colorDiffElement.textContent = gameState.colorDiff.toFixed(1);
+            multiplierElement.textContent = `${gameState.multiplier.toFixed(1)}x`;
+            
+            if (gameState.isTimeMode) {
+                const progressPercent = (gameState.correctInStage / 5) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+                progressText.textContent = `${gameState.correctInStage}/5`;
+                targetCountElement.textContent = `${gameState.correctInStage}/5`;
+                
+                const timePercent = (gameState.timeLeft / gameState.timeLimit) * 100;
+                timerFill.style.width = `${timePercent}%`;
+                const minutes = Math.floor(gameState.timeLeft / 60);
+                const seconds = gameState.timeLeft % 60;
+                timerText.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            } else {
+                const progressPercent = (gameState.correctInStage / 5) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+                progressText.textContent = `${gameState.correctInStage}/5`;
+                targetCountElement.textContent = `${gameState.correctInStage}/5`;
+            }
+            
+            const shapeData = difficultyCurve.find(s => s.stage === gameState.currentStage) || difficultyCurve[0];
+            updateShapePreview(shapeData);
+        }
+
+        function updateShapePreview(shapeData) {
+            shapePreview.style.borderRadius = shapeData.shapeRadius + 'px';
+            
+            if (shapeData.shape === 'circle') {
+                shapeLabel.textContent = '圆形';
+            } else if (shapeData.shape === 'round-square') {
+                shapeLabel.textContent = '圆角方形';
+            } else {
+                shapeLabel.textContent = '正方形';
+            }
+        }
+
+        function showMessage(text, type = '') {
+            messageElement.textContent = text;
+            messageElement.className = `message ${type}`;
+            
+            if (type === 'correct' || type === 'stage-up') {
+                messageElement.style.animation = 'none';
+                setTimeout(() => {
+                    messageElement.style.animation = 'pulse 1s infinite';
+                }, 10);
+            }
+        }
+        
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
+
+        function generateColorGrid() {
+            if (gameState.isProcessing) return;
+            gameState.isProcessing = true;
+            
+            showMessage('生成颜色中...', 'loading');
+            
+            setTimeout(() => {
+                colorGrid.innerHTML = '';
+                
+                const containerWidth = Math.max(120, colorGrid.parentElement.clientWidth - 40);
+                colorGrid.style.gridTemplateColumns = `repeat(${gameState.gridSize}, 1fr)`;
+                
+                gameState.baseColor = getOptimizedBaseColor(gameState.colorDiff);
+                gameState.differentColor = generatePreciseContrastColor(gameState.baseColor, gameState.colorDiff);
+                
+                let attempts = 0;
+                const maxAttempts = 3;
+                let actualDE = calculateDeltaE(gameState.baseColor, gameState.differentColor);
+                
+                while ((actualDE < gameState.colorDiff * 0.92 || actualDE > gameState.colorDiff * 1.08) && attempts < maxAttempts) {
+                    gameState.differentColor = generatePreciseContrastColor(gameState.baseColor, gameState.colorDiff);
+                    actualDE = calculateDeltaE(gameState.baseColor, gameState.differentColor);
+                    attempts++;
+                    }
+                
+                const totalCells = gameState.gridSize * gameState.gridSize;
+                gameState.differentIndex = Math.floor(Math.random() * totalCells);
+                
+                const cellSize = Math.min(
+                    Math.floor((containerWidth - (gameState.gridSize - 1) * 8) / gameState.gridSize),
+                    70
+                );
+                
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < totalCells; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'color-cell';
+                    cell.style.width = `${cellSize}px`;
+                    cell.style.height = `${cellSize}px`;
+                    cell.style.backgroundColor = i === gameState.differentIndex ? gameState.differentColor : gameState.baseColor;
+                    
+                    const shapeData = difficultyCurve.find(s => s.stage === gameState.currentStage) || difficultyCurve[0];
+                    cell.style.borderRadius = shapeData.shapeRadius + 'px';
+                    
+                    cell.style.opacity = '0';
+                    
+                    cell.addEventListener('click', debounce(() => handleCellClick(i)));
+                    fragment.appendChild(cell);
+                }
+                
+                colorGrid.appendChild(fragment);
+                
+                const cells = colorGrid.querySelectorAll('.color-cell');
+                setTimeout(() => {
+                    cells.forEach(cell => {
+                        cell.style.transition = 'opacity 0.3s ease';
+                        cell.style.opacity = '1';
+                    });
+                }, 10);
+                
+                gameState.isProcessing = false;
+                showMessage('请找出颜色不同的色块ψ(｀∇´)ψ', '');
+            }, 200);
+        }
+
+        function handleCellClick(index) {
+            if (!gameState.isPlaying || gameState.isClickLocked || gameState.isProcessing) return;
+            
+            lockClick();
+            
+            const cell = document.querySelectorAll('.color-cell')[index];
+            const rect = cell.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            if (index === gameState.differentIndex) {
+                cell.classList.add('correct');
+                createParticles(centerX, centerY, '#38a169', 12);
+                
+                const scoreAdd = Math.floor(10 * gameState.multiplier);
+                createScoreAnimation(centerX, centerY, scoreAdd);
+                
+                gameState.correctInStage++;
+                gameState.totalCorrect++;
+                gameState.score += scoreAdd;
+                
+                showMessage('正确！o((>ω< ))o', 'correct');
+                updateUI();
+                
+                if (gameState.isTimeMode) {
+                    setTimeout(() => {
+                        generateColorGrid();
+                    }, 400);
+                } else {
+                    if (gameState.correctInStage >= 5) {
+                        gameState.currentStage = Math.min(gameState.currentStage + 1, 40);
+                        gameState.correctInStage = 0;
+                        
+                        const newDifficulty = difficultyCurve.find(s => s.stage === gameState.currentStage) || difficultyCurve[difficultyCurve.length - 1];
+                        gameState.gridSize = newDifficulty.gridSize;
+                        gameState.colorDiff = newDifficulty.colorDiff;
+                        gameState.multiplier = multiplierByStage[gameState.currentStage] || gameState.multiplier;
+                        
+                        const messageRect = messageElement.getBoundingClientRect();
+                        createParticles(messageRect.left + messageRect.width / 2, messageRect.top + messageRect.height / 2, '#4299e1', 20);
+                        
+                        showMessage(`升级到${gameState.currentStage}阶段！${newDifficulty.difficultyType}`, 'stage-up');
+                        updateUI();
+                    }
+                    
+                    setTimeout(() => {
+                        generateColorGrid();
+                    }, 600);
+                }
+            } else {
+                cell.classList.add('incorrect');
+                createParticles(centerX, centerY, '#e53e3e', 8);
+                
+                endGame('incorrect');
+            }
+        }
+        
+        function updateDifficultyPreview(stage) {
+            const difficultyData = difficultyCurve.find(s => s.stage === stage) || difficultyCurve[0];
+            const multiplier = multiplierByStage[stage] || 1.0;
+            
+            previewGridSize.textContent = `${difficultyData.gridSize}×${difficultyData.gridSize}`;
+            previewColorDiff.textContent = difficultyData.colorDiff.toFixed(1);
+            previewMultiplier.textContent = `${multiplier.toFixed(1)}x`;
+            
+            if (difficultyData.shape === 'circle') {
+                previewShape.textContent = '圆形';
+            } else if (difficultyData.shape === 'round-square') {
+                previewShape.textContent = '圆角方形';
+            } else {
+                previewShape.textContent = '正方形';
+            }
+            
+            const progressPercent = (stage / 40) * 100;
+            difficultyProgress.style.width = `${progressPercent}%`;
+            
+            selectedDifficultyDisplay.textContent = `${stage} 级`;
+            
+            sliderMarks.forEach(mark => {
+                mark.classList.remove('active');
+                if (parseInt(mark.dataset.value) === stage) {
+                    mark.classList.add('active');
+                }
+            });
+        }
+        
+        function updateTimePreview(seconds) {
+            previewTime.textContent = `${seconds}秒`;
+            
+            if (seconds <= 30) {
+                previewTimeTarget.textContent = '极速挑战';
+            } else if (seconds <= 60) {
+                previewTimeTarget.textContent = '快速反应';
+            } else if (seconds <= 180) {
+                previewTimeTarget.textContent = '中等难度';
+            } else {
+                previewTimeTarget.textContent = '持久耐力';
+            }
+            
+            const timeMarks = document.querySelectorAll('.time-mark');
+            timeMarks.forEach(mark => {
+                mark.classList.remove('active');
+                if (parseInt(mark.dataset.value) === seconds) {
+                    mark.classList.add('active');
+                }
+            });
+        }
+        
+        function setInitialDifficulty(stage) {
+            gameState.initialDifficulty = stage;
+            gameState.currentStage = stage;
+            
+            const difficultyData = difficultyCurve.find(s => s.stage === stage) || difficultyCurve[0];
+            gameState.gridSize = difficultyData.gridSize;
+            gameState.colorDiff = difficultyData.colorDiff;
+            gameState.multiplier = multiplierByStage[stage] || 1.0;
+            gameState.shape = difficultyData.shape;
+            
+            updateUI();
+            updateDifficultyPreview(stage);
+        }
+        
+        function setTimeLimit(seconds) {
+            gameState.timeLimit = seconds;
+            gameState.timeLeft = seconds;
+            
+            updateTimePreview(seconds);
+            selectedTimeDisplay.textContent = `${seconds} 秒`;
+        }
+        
+        function applySettings() {
+            const selectedStage = parseInt(difficultySlider.value);
+            setInitialDifficulty(selectedStage);
+            
+            if (gameState.isTimeMode) {
+                const selectedTime = parseInt(timeSlider.value);
+                setTimeLimit(selectedTime);
+            }
+            
+            if (gameState.isPlaying) {
+                gameState.isPlaying = false;
+                startBtn.disabled = false;
+                giveupBtn.disabled = true;
+                colorGrid.innerHTML = '';
+                
+                if (gameState.isTimeMode) {
+                    clearInterval(gameState.timer);
+                }
+                
+                showMessage('难度设置已更新，点击开始游戏', '');
+            }
+            
+            const difficultyName = getDifficultyName(selectedStage);
+            showNotification(`设置已应用！${gameState.isTimeMode ? '限时模式' : '经典模式'}，难度 ${selectedStage} 级 (${difficultyName})`);
+        }
+        
+        function getDifficultyName(stage) {
+            if (stage <= 10) return '简单';
+            if (stage <= 20) return '中等';
+            if (stage <= 30) return '困难';
+            if (stage <= 35) return '专家';
+            return '大师';
+        }
+        
+        function startTimer() {
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+            }
+            
+            gameState.timer = setInterval(() => {
+                gameState.timeLeft--;
+                updateUI();
+                
+                if (gameState.timeLeft <= 0) {
+                    clearInterval(gameState.timer);
+                    endGame('timeup');
+                }
+            }, 1000);
+        }
+        
+        function endGame(reason) {
+            gameState.isPlaying = false;
+            clearInterval(gameState.timer);
+            
+            updateHighScore();
+            
+            if (reason === 'incorrect') {
+                if (gameState.isTimeMode) {
+                    const scorePerSecond = (gameState.score / gameState.timeLimit).toFixed(2);
+                    showMessage(`错误！本次得分: ${gameState.score} (${scorePerSecond}分/秒) 历史最高: ${gameState.timeModeHighScore.toFixed(2)}分/秒`, 'time-up');
+                } else {
+                    showMessage(`游戏结束！本次得分: ${gameState.score} 历史最高: ${gameState.highScore}分`, 'game-over');
+                }
+            } else if (reason === 'timeup') {
+                const scorePerSecond = (gameState.score / gameState.timeLimit).toFixed(2);
+                showMessage(`时间到！本次得分: ${gameState.score} (${scorePerSecond}分/秒) 历史最高: ${gameState.timeModeHighScore.toFixed(2)}分/秒`, 'time-up');
+            } else if (reason === 'giveup') {
+                if (gameState.isTimeMode) {
+                    const scorePerSecond = (gameState.score / (gameState.timeLimit - gameState.timeLeft)).toFixed(2);
+                    showMessage(`放弃该局！本次得分: ${gameState.score} (${scorePerSecond}分/秒)`, 'game-over');
+                } else {
+                    showMessage(`放弃该局！本次得分: ${gameState.score}`, 'game-over');
+                }
+            }
+            
+            startBtn.textContent = '再玩一次';
+            startBtn.disabled = false;
+            giveupBtn.disabled = true;
+            
+            const cells = document.querySelectorAll('.color-cell');
+            cells.forEach(cell => cell.classList.add('disabled'));
+            
+            const gridContainer = document.querySelector('.color-grid-container');
+            gridContainer.style.animation = 'none';
+            setTimeout(() => {
+                gridContainer.style.animation = 'pulse 0.5s ease-in-out 2';
+            }, 10);
+        }
+        
+        function giveUpGame() {
+            if (!gameState.isPlaying) return;
+            
+            if (confirm('确定要放弃当前游戏吗？')) {
+                endGame('giveup');
+            }
+        }
+
+        function initGame() {
+            gameState.isPlaying = false;
+            gameState.score = 0;
+            gameState.correctInStage = 0;
+            gameState.totalCorrect = 0;
+            
+            if (gameState.isTimeMode) {
+                gameState.timeLeft = gameState.timeLimit;
+                clearInterval(gameState.timer);
+            } else {
+                setInitialDifficulty(gameState.initialDifficulty);
+            }
+            
+            updateUI();
+            showMessage('点击[开始游戏]', '');
+            colorGrid.innerHTML = '';
+            
+            startBtn.textContent = '开始游戏';
+            startBtn.disabled = false;
+            giveupBtn.disabled = true;
+            
+            updateHighScoreDisplay();
+        }
+
+        function startGame() {
+            if (gameState.isPlaying) {
+                return;
+            }
+            
+            if (startBtn.textContent === '再玩一次') {
+                initGame();
+            }
+            
+            gameState.isPlaying = true;
+            startBtn.disabled = true;
+            giveupBtn.disabled = false;
+            
+            if (gameState.isTimeMode) {
+                gameState.timeLeft = gameState.timeLimit;
+                showMessage(`限时模式开始！你有${gameState.timeLimit}秒时间`, 'stage-up');
+                startTimer();
+            } else {
+                showMessage('游戏开始！', 'stage-up');
+            }
+            
+            generateColorGrid();
+        }
+        
+        function initDifficultySelector() {
+            difficultySlider.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                updateDifficultyPreview(value);
+            });
+            
+            sliderMarks.forEach(mark => {
+                mark.addEventListener('click', function() {
+                    const value = parseInt(this.dataset.value);
+                    difficultySlider.value = value;
+                    updateDifficultyPreview(value);
+                });
+            });
+            
+            timeSlider.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                setTimeLimit(value);
+            });
+            
+            timeMarks.forEach(mark => {
+                mark.addEventListener('click', function() {
+                    const value = parseInt(this.dataset.value);
+                    timeSlider.value = value;
+                    setTimeLimit(value);
+                });
+            });
+            
+            applySettingsBtn.addEventListener('click', applySettings);
+            
+            normalModeBtn.addEventListener('click', function() {
+                if (gameState.isTimeMode) {
+                    gameState.isTimeMode = false;
+                    localStorage.setItem('colorVisionTimeMode', 'false');
+                    initGameMode();
+                    initGame();
+                }
+            });
+            
+            timeModeBtn.addEventListener('click', function() {
+                if (!gameState.isTimeMode) {
+                    gameState.isTimeMode = true;
+                    localStorage.setItem('colorVisionTimeMode', 'true');
+                    initGameMode();
+                    initGame();
+                }
+            });
+            
+            lightThemeBtn.addEventListener('click', function() {
+                if (gameState.isDarkTheme) {
+                    gameState.isDarkTheme = false;
+                    localStorage.setItem('colorVisionDarkTheme', 'false');
+                    initTheme();
+                }
+            });
+            
+            darkThemeBtn.addEventListener('click', function() {
+                if (!gameState.isDarkTheme) {
+                    gameState.isDarkTheme = true;
+                    localStorage.setItem('colorVisionDarkTheme', 'true');
+                    initTheme();
+                }
+            });
+            
+            updateDifficultyPreview(1);
+            setTimeLimit(30);
+        }
+
+        startBtn.addEventListener('click', startGame);
+        giveupBtn.addEventListener('click', giveUpGame);
+        
+        window.addEventListener('load', () => {
+            initTheme();
+            initGameMode();
+            initGame();
+            initDifficultySelector();
+        });
+
+        window.addEventListener('resize', debounce(() => {
+            if (gameState.isPlaying && !gameState.isProcessing) {
+                generateColorGrid();
+            }
+        }, 500));
+    </script>
+</body>
+</html>
