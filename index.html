@@ -1773,7 +1773,7 @@
             } else {
                 const progressPercent = (gameState.correctInStage / 3) * 100;
                 progressBar.style.width = `${progressPercent}%`;
-                progressText.textContent = `${gameState.correctInStage}`;
+                progressText.textContent = `${gameState.correctInStage}/3`;
                 targetCountElement.textContent = `${gameState.correctInStage}/3`;
             }
             
