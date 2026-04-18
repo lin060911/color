@@ -26,6 +26,10 @@
             --shadow-color: rgba(0, 0, 0, 0.05);
             --progress-bg: #e2e8f0;
             --particle-color: #4299e1;
+            --btn1-color:#2d66ab;
+            --btn2-color:#91cfd5;
+            --btn3-color:#7167c1;
+            --btn4-color:#91c53a;
         }
         
         .dark-theme {
@@ -42,6 +46,10 @@
             --shadow-color: rgba(0, 0, 0, 0.2);
             --progress-bg: #334155;
             --particle-color: #60a5fa;
+            --btn1-color:#91cfd5;
+            --btn2-color:#113056;
+            --btn3-color:#91c53a;
+            --btn4-color:#5e55a2;
         }
         
         body {
@@ -183,7 +191,7 @@
         
         .timer-fill {
             height: 100%;
-            background: linear-gradient(90deg, #ffaa65 0%, #ff6c6c 100%);
+            background: linear-gradient(90deg, #f7e85c 0%, #e45369 80%);
             width: 0%;
             transition: width 0.5s ease;
             border-radius: 40px;
@@ -200,20 +208,7 @@
             color: var(--text-color);
         }
         
-        .difficulty-info {
-            display: flex;
-            justify-content: center;
-            gap: clamp(16px, 4vw, 30px);
-            margin: 12px 0 16px;
-            flex-wrap: wrap;
-        }
-        
-        .difficulty-item {
-            text-align: center;
-            flex: 1;
-            max-width: 100px;
-        }
-        
+    
         .shape-preview {
             width: 36px;
             height: 36px;
@@ -233,8 +228,8 @@
             border-radius: 12px;
             box-shadow: 0 2px 12px var(--shadow-color);
             width: 100%;
-            min-height: 120px;
-            max-height: 590px;
+            min-height: 150px;
+            max-height: 600px;
             overflow: hidden;
             position: relative;
         }
@@ -292,6 +287,7 @@
             margin-top: 12px;
             width: 100%;
             padding: 6px;
+            flex-wrap: wrap;
         }
         
         button {
@@ -330,6 +326,15 @@
         .apply-btn {
             background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
+        }
+        
+        .toggle-btn1 {
+            background: var(--btn1-color);
+            color:var(--btn2-color);
+        }
+        .toggle-btn2 {
+            background: var(--btn3-color);
+            color:var(--btn4-color);
         }
         
         button:hover {
@@ -518,12 +523,13 @@
         }
         
         .switch-option {
-            padding: 8px 12px;
+            padding: 8px 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            min-width: 70px;
+            min-width: 80px;
             font-size: 0.8rem;
+            font-weight: 600;
         }
         
         .switch-option.active {
@@ -557,9 +563,8 @@
         }
         
         .score-detail {
-            font-size: 1.1rem;
-            color: var(--text-color-light);
-            margin: 6px 0;
+            color:#34d399;
+            font-weight: 600;
         }
         
         .initial-difficulty {
@@ -569,6 +574,7 @@
             border-radius: 12px;
             box-shadow: 0 2px 12px var(--shadow-color);
             width: 100%;
+            display: none;
         }
         
         .difficulty-selector {
@@ -721,6 +727,7 @@
             font-size: 0.9rem;
             width: 100%;
             box-shadow: 0 2px 8px var(--shadow-color);
+            display: none;
         }
         
         .instructions h3 {
@@ -762,7 +769,7 @@
             color: var(--error-color);
             font-weight: 700;
         }
-        
+
         .high-score-detail {
             color:#ffb300;
             font-weight: 600;
@@ -896,7 +903,7 @@
         
         .time-progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #f68e38 0%, #f04747 100%);
+            background: linear-gradient(90deg, #f63838 0%, #f04747 100%);
             width: 0%;
             border-radius: 40px;
         }
@@ -938,10 +945,29 @@
         
         @media (max-width: 768px) {
             .game-info {
-                flex-direction: column;
-                gap: 12px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
             }
-            
+            .switch-option {
+                white-space: nowrap;
+                text-align: center;
+                padding: 12px 8px;
+                min-width: 40px;
+                font-size: 14px;
+                line-height: 1.2;
+                display: flex; 
+                align-items: center;
+                justify-content: center;
+            }
+            .info-box {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-height: 80px;
+            }
             .controls {
                 flex-direction: column;
                 align-items: center;
@@ -1027,12 +1053,12 @@
         
         <div class="switch-container">
             <div class="switch-group">
-                <div class="switch-option active" id="lightTheme">🌞 开灯</div>
+                <div class="switch-option active" id="lightTheme">💡 开灯</div>
                 <div class="switch-option" id="darkTheme">🌙 关灯</div>
             </div>
             <div class="switch-group">
-                <div class="switch-option active" id="normalMode">☺️ 经典模式</div>
-                <div class="switch-option" id="timeMode">⏱️ 限时模式</div>
+                <div class="switch-option active" id="normalMode">☺️经典模式</div>
+                <div class="switch-option" id="timeMode">⏱️限时模式</div>
             </div>
         </div>
         
@@ -1041,36 +1067,32 @@
                 <div class="info-label">当前阶段</div>
                 <div id="stage" class="info-value">1</div>
             </div>
-            
-            <div class="info-box">
-                <div class="info-label">分数</div>
-                <div id="score" class="info-value">0</div>
-                <div class="info-detail">倍率: <span id="multiplier">1.0x</span></div>
-            </div>
-            
+                        
             <div class="info-box">
                 <div class="info-label">网格</div>
                 <div id="gridSize" class="info-value">2×2</div>
                 <div class="info-detail">色差: ΔE=<span id="colorDiff">15.0</span></div>
             </div>
-        </div>
-        
 
-        
-        <div class="difficulty-info">
-            <div class="difficulty-item">
+            <div class="info-box">
                 <div class="info-label">形状</div>
                 <div id="shapePreview" class="shape-preview"></div>
                 <div class="info-detail" id="shapeLabel">正方形</div>
             </div>
             
-            <div class="difficulty-item">
+            <div class="info-box">
                 <div class="info-label" id="targetLabel">目标</div>
-                <div id="targetCount" class="info-value">1/5</div>
+                <div id="targetCount" class="info-value">1/3</div>
                 <div class="info-detail" id="targetDetail">进入下一阶段</div>
             </div>
-            
-            <div class="difficulty-item">
+
+            <div class="info-box">
+                <div class="info-label">分数</div>
+                <div id="score" class="info-value score-detail">0</div>
+                <div class="info-detail">倍率: <span id="multiplier">1.0x</span></div>
+            </div>
+
+            <div class="info-box">
                 <div class="info-label">历史最高</div>
                 <div id="highScore" class="info-value high-score-detail">0.00</div>
                 <div class="info-detail" id="highScoreDetail">经典模式</div>
@@ -1099,8 +1121,12 @@
             <button id="startBtn">开始游戏</button>
             <button id="giveupBtn" disabled>放弃该局</button>
         </div>
+        <div class="controls">
+            <button id="toggleDifficultyBtn" class="toggle-btn1">难度设置</button>
+            <button id="toggleRulesBtn" class="toggle-btn2">游戏规则</button>
+        </div>
         
-        <div class="initial-difficulty">
+        <div class="initial-difficulty" id="difficultySection">
             <div class="difficulty-selector">
                 <h3 class="difficulty-title">🎮初始难度选择</h3>
                 <div class="difficulty-display" id="selectedDifficultyDisplay">1 级</div>
@@ -1109,15 +1135,10 @@
                     <input type="range" min="1" max="50" value="1" class="difficulty-slider" id="difficultySlider">
                     <div class="slider-marks">
                         <span class="slider-mark active" data-value="1">1</span>
-                        <span class="slider-mark" data-value="5">5</span>
                         <span class="slider-mark" data-value="10"><strong>10</strong></span>
-                        <span class="slider-mark" data-value="15">15</span>
                         <span class="slider-mark" data-value="20"><strong>20</strong></span>
-                        <span class="slider-mark" data-value="25">25</span>
                         <span class="slider-mark" data-value="30"><strong>30</strong></span>
-                        <span class="slider-mark" data-value="35">35</span>
                         <span class="slider-mark" data-value="40"><strong>40</strong></span>
-                        <span class="slider-mark" data-value="45">45</span>
                         <span class="slider-mark" data-value="50"><strong>50</strong></span>
                     </div>
                 </div>
@@ -1179,21 +1200,53 @@
             </div>
         </div>
         
-        <div class="instructions">
+        <div class="instructions" id="rulesSection">
             <h3>ℹ️游戏规则<(￣︶￣)↘</h3>
             <ul>
-                <li><strong>经典模式</strong>：找到网格中颜色不同的色块并点击，每正确3次进入下一阶段，难度提升，得分倍率提升，选择错误则游戏结束</li><br>
-                <li><strong>限时模式</strong>：在限定时间内尽可能多地找出不同色块,<strong>期间难度不会提升</strong>，时间耗尽或选错则结束，按[得分/秒]计入成绩</li><br>
+                <li><strong>经典模式</strong>：找到网格中颜色不同的色块并点击，每正确3次进入下一阶段，难度提升，得分倍率提升，选择错误则游戏结束</li>
+                <br>
+                <li><strong>限时模式</strong>：在限定时间内尽可能多地找出不同色块,<strong>期间难度不会提升</strong>，时间耗尽或选错则结束，按[得分/秒]计入成绩</li>
+                <br>
                 <li>可以通过拖动条选择初始难度,最高50级,限时模式还可调节时长,<strong>记得点击"应用设置"</strong></li>
+
                 <li>点击页面最上方按钮可切换浅色/深色模式,经典模式/限时模式</li>
-                <li>难度41级开始为《返璞归真》,在最少的色块里,挑战极致辨识能力</li><br>
-                <li><strong>作者：</strong>L1Nzy <strong> 邮箱：</strong>lin060911@qq.com</li>
+
+                <li>难度41级开始为《返璞归真》,在最少的色块里,挑战极致辨识能力</li>
             </ul>
         </div>
     </div>
-    
     <div class="notification" id="notification">设置已应用！</div>
+    <p style="            font-size: clamp(0.8rem, 2vw, 0.4rem);
+            color: var(--text-color-light);
+            font-weight: 400;"><br><strong>作者：</strong>L1Nzy <strong> 邮箱：</strong>lin060911@qq.com</p>
+
     <script>
+        const toggleDifficultyBtn = document.getElementById('toggleDifficultyBtn');
+        const difficultySection = document.getElementById('difficultySection');
+        
+        toggleDifficultyBtn.addEventListener('click', function() {
+            if (difficultySection.style.display === 'none' || difficultySection.style.display === '') {
+                difficultySection.style.display = 'block';
+                toggleDifficultyBtn.textContent = '收起难度设置';
+            } else {
+                difficultySection.style.display = 'none';
+                toggleDifficultyBtn.textContent = '难度设置';
+            }
+        });
+
+        const toggleRulesBtn = document.getElementById('toggleRulesBtn');
+        const rulesSection = document.getElementById('rulesSection');
+        
+        toggleRulesBtn.addEventListener('click', function() {
+            if (rulesSection.style.display === 'none' || rulesSection.style.display === '') {
+                rulesSection.style.display = 'block';
+                toggleRulesBtn.textContent = '收起游戏规则';
+            } else {
+                rulesSection.style.display = 'none';
+                toggleRulesBtn.textContent = '游戏规则';
+            }
+        });
+
         const gameState = {
             isPlaying: false,
             currentStage: 1,
@@ -1269,12 +1322,12 @@
             { stage: 42, gridSize: 5, colorDiff: 3.6, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
             { stage: 43, gridSize: 4, colorDiff: 3.4, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
             { stage: 44, gridSize: 3, colorDiff: 3.2, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
-            { stage: 45, gridSize: 2, colorDiff: 2.7, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
-            { stage: 46, gridSize: 2, colorDiff: 2.6, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
-            { stage: 47, gridSize: 2, colorDiff: 2.5, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
-            { stage: 48, gridSize: 2, colorDiff: 2.4, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
-            { stage: 49, gridSize: 2, colorDiff: 2.3, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
-            { stage: 50, gridSize: 4, colorDiff: 2.0, shape: 'circle', shapeRadius: 50, difficultyType: '最终难度' }
+            { stage: 45, gridSize: 2, colorDiff: 2.6, shape: 'circle', shapeRadius: 50, difficultyType: '返璞归真' },
+            { stage: 46, gridSize: 2, colorDiff: 2.3, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 47, gridSize: 2, colorDiff: 2.0, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 48, gridSize: 2, colorDiff: 1.8, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 49, gridSize: 2, colorDiff: 1.6, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
+            { stage: 50, gridSize: 4, colorDiff: 1.0, shape: 'circle', shapeRadius: 50, difficultyType: '最终难度' }
 
         ];
 
@@ -2074,9 +2127,9 @@
             if (reason === 'incorrect') {
                 if (gameState.isTimeMode) {
                     const scorePerSecond = (gameState.score / gameState.timeLimit).toFixed(2);
-                    showMessage(`〒▽〒错误！本次得分: ${gameState.score} (${scorePerSecond}分/秒) 历史最高: ${gameState.timeModeHighScore.toFixed(2)}分/秒`, 'time-up');
+                    showMessage(`〒Δ〒错误！本次得分: ${gameState.score} (${scorePerSecond}分/秒) 历史最高: ${gameState.timeModeHighScore.toFixed(2)}分/秒`, 'time-up');
                 } else {
-                    showMessage(`〒▽〒游戏结束！本次得分: ${gameState.score} 历史最高: ${gameState.highScore}分`, 'game-over');
+                    showMessage(`〒Δ〒游戏结束！本次得分: ${gameState.score} 历史最高: ${gameState.highScore}分`, 'game-over');
                 }
             } else if (reason === 'timeup') {
                 const scorePerSecond = (gameState.score / gameState.timeLimit).toFixed(2);
