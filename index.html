@@ -30,6 +30,30 @@
             --btn2-color:#91cfd5;
             --btn3-color:#7167c1;
             --btn4-color:#91c53a;
+            
+            --easter-egg-index: 0;
+            --easter-color-light-1: #e6397c;
+            --easter-color-dark-1: #1a1a1d;
+            --easter-color-light-2: #f5efea;
+            --easter-color-dark-2: #233e96;
+            --easter-color-light-3: #91c53a;
+            --easter-color-dark-3: #5e55a2;
+            --easter-color-light-4: #f1dddf;
+            --easter-color-dark-4: #cb3a50;
+            --easter-color-light-5:#91cfd5 ;
+            --easter-color-dark-5: #113056;
+        }
+        
+        .theme-default {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --text-color-light: #718096;
+            --primary-color: #4299e1;
+            --secondary-color: #38b2ac;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --progress-bg: #e2e8f0;
         }
         
         .dark-theme {
@@ -50,6 +74,390 @@
             --btn2-color:#113056;
             --btn3-color:#91c53a;
             --btn4-color:#5e55a2;
+        }
+        
+
+        .easter-theme-1.light-theme {
+            --bg-color: var(--easter-color-light-1);
+            --card-bg: var(--easter-color-dark-1);
+            --text-color: var(--easter-color-dark-1);
+            --text-color-light: var(--easter-color-dark-1);
+            --btn1-color: var(--easter-color-dark-1);
+            --btn2-color: var(--easter-color-light-1);
+            --btn3-color: var(--easter-color-dark-1);
+            --btn4-color: var(--easter-color-light-1);
+            --primary-color: var(--easter-color-light-1);
+
+        }
+        
+        .easter-theme-1.dark-theme {
+            --bg-color: var(--easter-color-dark-1);
+            --card-bg: var(--easter-color-light-1);
+            --text-color: var(--easter-color-light-1);
+            --text-color-light: var(--easter-color-light-1);
+            --btn1-color: var(--easter-color-light-1);
+            --btn2-color: var(--easter-color-dark-1);
+            --btn3-color: var(--easter-color-light-1);
+            --btn4-color: var(--easter-color-dark-1);
+            --primary-color: var(--easter-color-dark-1);
+        }
+
+        .easter-theme-1.light-theme .subtitle,
+        .easter-theme-1.light-theme .progress-text,
+        .easter-theme-1.light-theme .timer-text,
+        .easter-theme-1.light-theme .difficulty-preview-label,
+        .easter-theme-1.light-theme .difficulty-preview-value,
+        .easter-theme-1.light-theme .time-preview-label,
+        .easter-theme-1.light-theme .time-preview-value,
+        .easter-theme-1.light-theme .switch-option  {
+            color: var(--easter-color-dark-1) !important;
+        }
+        .easter-theme-1.light-theme .shape-label,
+        .easter-theme-1.light-theme .info-label,
+        .easter-theme-1.light-theme .info-detail,        
+        .easter-theme-1.light-theme .info-value,
+        .easter-theme-1.light-theme .difficulty-title,
+        .easter-theme-1.light-theme .info-value-small,
+        .easter-theme-1.light-theme .score-detail,
+        .easter-theme-1.light-theme .high-score-detail,
+        .easter-theme-1.light-theme .difficulty-display,
+        .easter-theme-1.light-theme .time-display,
+        .easter-theme-1.light-theme .instructions h3,
+        .easter-theme-1.light-theme .instructions ul,
+        .easter-theme-1.light-theme .instructions li
+        {
+            color: var(--easter-color-light-1) !important;
+        }
+        
+        .easter-theme-1.dark-theme .subtitle,
+        .easter-theme-1.dark-theme .progress-text,
+        .easter-theme-1.dark-theme .timer-text,
+        .easter-theme-1.dark-theme .difficulty-preview-label,
+        .easter-theme-1.dark-theme .difficulty-preview-value,
+        .easter-theme-1.dark-theme .time-preview-label,
+        .easter-theme-1.dark-theme .time-preview-value,
+        .easter-theme-1.dark-theme .switch-option {
+            color: var(--easter-color-light-1) !important;
+        }
+        .easter-theme-1.dark-theme .shape-label,
+        .easter-theme-1.dark-theme .info-label,
+        .easter-theme-1.dark-theme .info-detail,        
+        .easter-theme-1.dark-theme .info-value,
+        .easter-theme-1.dark-theme .difficulty-title,
+        .easter-theme-1.dark-theme .info-value-small,
+        .easter-theme-1.dark-theme .score-detail,
+        .easter-theme-1.dark-theme .high-score-detail,
+        .easter-theme-1.dark-theme .difficulty-display,
+        .easter-theme-1.dark-theme .time-display,
+        .easter-theme-1.dark-theme .instructions h3,
+        .easter-theme-1.dark-theme .instructions ul,
+        .easter-theme-1.dark-heme .instructions li    {
+            color: var(--easter-color-dark-1) !important;
+        }
+        
+
+        .easter-theme-2.light-theme {
+            --bg-color: var(--easter-color-light-2);
+            --card-bg: var(--easter-color-dark-2);
+            --text-color: var(--easter-color-dark-2);
+            --text-color-light: var(--easter-color-dark-2);
+            --btn1-color: var(--easter-color-dark-2);
+            --btn2-color: var(--easter-color-light-2);
+            --btn3-color: var(--easter-color-dark-2);
+            --btn4-color: var(--easter-color-light-2);
+            --primary-color: var(--easter-color-light-2);
+        }
+
+        .easter-theme-2.dark-theme {
+            --bg-color: var(--easter-color-dark-2);
+            --card-bg: var(--easter-color-light-2);
+            --text-color: var(--easter-color-light-2);
+            --text-color-light: var(--easter-color-light-2);
+            --btn1-color: var(--easter-color-light-2);
+            --btn2-color: var(--easter-color-dark-2);
+            --btn3-color: var(--easter-color-light-2);
+            --btn4-color: var(--easter-color-dark-2);
+            --primary-color: var(--easter-color-dark-2);
+        }
+
+        .easter-theme-2.light-theme .subtitle,
+        .easter-theme-2.light-theme .progress-text,
+        .easter-theme-2.light-theme .timer-text,
+        .easter-theme-2.light-theme .difficulty-preview-label,
+        .easter-theme-2.light-theme .difficulty-preview-value,
+        .easter-theme-2.light-theme .time-preview-label,
+        .easter-theme-2.light-theme .time-preview-value,
+        .easter-theme-2.light-theme .switch-option {
+            color: var(--easter-color-dark-2) !important;
+        }
+        .easter-theme-2.light-theme .shape-label,
+        .easter-theme-2.light-theme .info-label,
+        .easter-theme-2.light-theme .info-detail,        
+        .easter-theme-2.light-theme .info-value,
+        .easter-theme-2.light-theme .difficulty-title,
+        .easter-theme-2.light-theme .info-value-small,
+        .easter-theme-2.light-theme .score-detail,
+        .easter-theme-2.light-theme .high-score-detail,
+        .easter-theme-2.light-theme .difficulty-display,
+        .easter-theme-2.light-theme .time-display,
+        .easter-theme-2.light-theme .instructions h3,
+        .easter-theme-2.light-theme .instructions ul,
+        .easter-theme-2.light-theme .instructions li {
+            color: var(--easter-color-light-2) !important;
+        }
+
+        .easter-theme-2.dark-theme .subtitle,
+        .easter-theme-2.dark-theme .progress-text,
+        .easter-theme-2.dark-theme .timer-text,
+        .easter-theme-2.dark-theme .difficulty-preview-label,
+        .easter-theme-2.dark-theme .difficulty-preview-value,
+        .easter-theme-2.dark-theme .time-preview-label,
+        .easter-theme-2.dark-theme .time-preview-value,
+        .easter-theme-2.dark-theme .switch-option {
+            color: var(--easter-color-light-2) !important;
+        }
+        .easter-theme-2.dark-theme .shape-label,
+        .easter-theme-2.dark-theme .info-label,
+        .easter-theme-2.dark-theme .info-detail,        
+        .easter-theme-2.dark-theme .info-value,
+        .easter-theme-2.dark-theme .difficulty-title,
+        .easter-theme-2.dark-theme .info-value-small,
+        .easter-theme-2.dark-theme .score-detail,
+        .easter-theme-2.dark-theme .high-score-detail,
+        .easter-theme-2.dark-theme .difficulty-display,
+        .easter-theme-2.dark-theme .time-display,
+        .easter-theme-2.dark-theme .instructions h3,
+        .easter-theme-2.dark-theme .instructions ul,
+        .easter-theme-2.dark-theme .instructions li {
+            color: var(--easter-color-dark-2) !important;
+        }
+
+        .easter-theme-3.light-theme {
+            --bg-color: var(--easter-color-light-3);
+            --card-bg: var(--easter-color-dark-3);
+            --text-color: var(--easter-color-dark-3);
+            --text-color-light: var(--easter-color-dark-3);
+            --btn1-color: var(--easter-color-dark-3);
+            --btn2-color: var(--easter-color-light-3);
+            --btn3-color: var(--easter-color-dark-3);
+            --btn4-color: var(--easter-color-light-3);
+            --primary-color: var(--easter-color-light-3);
+        }
+
+        .easter-theme-3.dark-theme {
+            --bg-color: var(--easter-color-dark-3);
+            --card-bg: var(--easter-color-light-3);
+            --text-color: var(--easter-color-light-3);
+            --text-color-light: var(--easter-color-light-3);
+            --btn1-color: var(--easter-color-light-3);
+            --btn2-color: var(--easter-color-dark-3);
+            --btn3-color: var(--easter-color-light-3);
+            --btn4-color: var(--easter-color-dark-3);
+            --primary-color: var(--easter-color-dark-3);
+        }
+
+        .easter-theme-3.light-theme .subtitle,
+        .easter-theme-3.light-theme .progress-text,
+        .easter-theme-3.light-theme .timer-text,
+        .easter-theme-3.light-theme .difficulty-preview-label,
+        .easter-theme-3.light-theme .difficulty-preview-value,
+        .easter-theme-3.light-theme .time-preview-label,
+        .easter-theme-3.light-theme .time-preview-value,
+        .easter-theme-3.light-theme .switch-option {
+            color: var(--easter-color-dark-3) !important;
+        }
+        .easter-theme-3.light-theme .shape-label,
+        .easter-theme-3.light-theme .info-label,
+        .easter-theme-3.light-theme .info-detail,        
+        .easter-theme-3.light-theme .info-value,
+        .easter-theme-3.light-theme .difficulty-title,
+        .easter-theme-3.light-theme .info-value-small,
+        .easter-theme-3.light-theme .score-detail,
+        .easter-theme-3.light-theme .high-score-detail,
+        .easter-theme-3.light-theme .difficulty-display,
+        .easter-theme-3.light-theme .time-display,
+        .easter-theme-3.light-theme .instructions h3,
+        .easter-theme-3.light-theme .instructions ul,
+        .easter-theme-3.light-theme .instructions li {
+            color: var(--easter-color-light-3) !important;
+        }
+
+        .easter-theme-3.dark-theme .subtitle,
+        .easter-theme-3.dark-theme .progress-text,
+        .easter-theme-3.dark-theme .timer-text,
+        .easter-theme-3.dark-theme .difficulty-preview-label,
+        .easter-theme-3.dark-theme .difficulty-preview-value,
+        .easter-theme-3.dark-theme .time-preview-label,
+        .easter-theme-3.dark-theme .time-preview-value,
+        .easter-theme-3.dark-theme .switch-option {
+            color: var(--easter-color-light-3) !important;
+        }
+        .easter-theme-3.dark-theme .shape-label,
+        .easter-theme-3.dark-theme .info-label,
+        .easter-theme-3.dark-theme .info-detail,        
+        .easter-theme-3.dark-theme .info-value,
+        .easter-theme-3.dark-theme .difficulty-title,
+        .easter-theme-3.dark-theme .info-value-small,
+        .easter-theme-3.dark-theme .score-detail,
+        .easter-theme-3.dark-theme .high-score-detail,
+        .easter-theme-3.dark-theme .difficulty-display,
+        .easter-theme-3.dark-theme .time-display,
+        .easter-theme-3.dark-theme .instructions h3,
+        .easter-theme-3.dark-theme .instructions ul,
+        .easter-theme-3.dark-theme .instructions li {
+            color: var(--easter-color-dark-3) !important;
+        }
+
+        .easter-theme-4.light-theme {
+            --bg-color: var(--easter-color-light-4);
+            --card-bg: var(--easter-color-dark-4);
+            --text-color: var(--easter-color-dark-4);
+            --text-color-light: var(--easter-color-dark-4);
+            --btn1-color: var(--easter-color-dark-4);
+            --btn2-color: var(--easter-color-light-4);
+            --btn3-color: var(--easter-color-dark-4);
+            --btn4-color: var(--easter-color-light-4);
+            --primary-color: var(--easter-color-light-4);
+        }
+
+        .easter-theme-4.dark-theme {
+            --bg-color: var(--easter-color-dark-4);
+            --card-bg: var(--easter-color-light-4);
+            --text-color: var(--easter-color-light-4);
+            --text-color-light: var(--easter-color-light-4);
+            --btn1-color: var(--easter-color-light-4);
+            --btn2-color: var(--easter-color-dark-4);
+            --btn3-color: var(--easter-color-light-4);
+            --btn4-color: var(--easter-color-dark-4);
+            --primary-color: var(--easter-color-dark-4);
+        }
+
+        .easter-theme-4.light-theme .subtitle,
+        .easter-theme-4.light-theme .progress-text,
+        .easter-theme-4.light-theme .timer-text,
+        .easter-theme-4.light-theme .difficulty-preview-label,
+        .easter-theme-4.light-theme .difficulty-preview-value,
+        .easter-theme-4.light-theme .time-preview-label,
+        .easter-theme-4.light-theme .time-preview-value,
+        .easter-theme-4.light-theme .switch-option {
+            color: var(--easter-color-dark-4) !important;
+        }
+        .easter-theme-4.light-theme .shape-label,
+        .easter-theme-4.light-theme .info-label,
+        .easter-theme-4.light-theme .info-detail,        
+        .easter-theme-4.light-theme .info-value,
+        .easter-theme-4.light-theme .difficulty-title,
+        .easter-theme-4.light-theme .info-value-small,
+        .easter-theme-4.light-theme .score-detail,
+        .easter-theme-4.light-theme .high-score-detail,
+        .easter-theme-4.light-theme .difficulty-display,
+        .easter-theme-4.light-theme .time-display,
+        .easter-theme-4.light-theme .instructions h3,
+        .easter-theme-4.light-theme .instructions ul,
+        .easter-theme-4.light-theme .instructions li {
+            color: var(--easter-color-light-4) !important;
+        }
+
+        .easter-theme-4.dark-theme .subtitle,
+        .easter-theme-4.dark-theme .progress-text,
+        .easter-theme-4.dark-theme .timer-text,
+        .easter-theme-4.dark-theme .difficulty-preview-label,
+        .easter-theme-4.dark-theme .difficulty-preview-value,
+        .easter-theme-4.dark-theme .time-preview-label,
+        .easter-theme-4.dark-theme .time-preview-value,
+        .easter-theme-4.dark-theme .switch-option {
+            color: var(--easter-color-light-4) !important;
+        }
+        .easter-theme-4.dark-theme .shape-label,
+        .easter-theme-4.dark-theme .info-label,
+        .easter-theme-4.dark-theme .info-detail,        
+        .easter-theme-4.dark-theme .info-value,
+        .easter-theme-4.dark-theme .difficulty-title,
+        .easter-theme-4.dark-theme .info-value-small,
+        .easter-theme-4.dark-theme .score-detail,
+        .easter-theme-4.dark-theme .high-score-detail,
+        .easter-theme-4.dark-theme .difficulty-display,
+        .easter-theme-4.dark-theme .time-display,
+        .easter-theme-4.dark-theme .instructions h3,
+        .easter-theme-4.dark-theme .instructions ul,
+        .easter-theme-4.dark-theme .instructions li {
+            color: var(--easter-color-dark-4) !important;
+        }
+
+        .easter-theme-5.light-theme {
+            --bg-color: var(--easter-color-light-5);
+            --card-bg: var(--easter-color-dark-5);
+            --text-color: var(--easter-color-dark-5);
+            --text-color-light: var(--easter-color-dark-5);
+            --btn1-color: var(--easter-color-dark-5);
+            --btn2-color: var(--easter-color-light-5);
+            --btn3-color: var(--easter-color-dark-5);
+            --btn4-color: var(--easter-color-light-5);
+            --primary-color: var(--easter-color-light-5);
+        }
+
+        .easter-theme-5.dark-theme {
+            --bg-color: var(--easter-color-dark-5);
+            --card-bg: var(--easter-color-light-5);
+            --text-color: var(--easter-color-light-5);
+            --text-color-light: var(--easter-color-light-5);
+            --btn1-color: var(--easter-color-light-5);
+            --btn2-color: var(--easter-color-dark-5);
+            --btn3-color: var(--easter-color-light-5);
+            --btn4-color: var(--easter-color-dark-5);
+            --primary-color: var(--easter-color-dark-5);
+        }
+
+        .easter-theme-5.light-theme .subtitle,
+        .easter-theme-5.light-theme .progress-text,
+        .easter-theme-5.light-theme .timer-text,
+        .easter-theme-5.light-theme .difficulty-preview-label,
+        .easter-theme-5.light-theme .difficulty-preview-value,
+        .easter-theme-5.light-theme .time-preview-label,
+        .easter-theme-5.light-theme .time-preview-value,
+        .easter-theme-5.light-theme .switch-option {
+            color: var(--easter-color-dark-5) !important;
+        }
+        .easter-theme-5.light-theme .shape-label,
+        .easter-theme-5.light-theme .info-label,
+        .easter-theme-5.light-theme .info-detail,        
+        .easter-theme-5.light-theme .info-value,
+        .easter-theme-5.light-theme .difficulty-title,
+        .easter-theme-5.light-theme .info-value-small,
+        .easter-theme-5.light-theme .score-detail,
+        .easter-theme-5.light-theme .high-score-detail,
+        .easter-theme-5.light-theme .difficulty-display,
+        .easter-theme-5.light-theme .time-display,
+        .easter-theme-5.light-theme .instructions h3,
+        .easter-theme-5.light-theme .instructions ul,
+        .easter-theme-5.light-theme .instructions li {
+            color: var(--easter-color-light-5) !important;
+        }
+
+        .easter-theme-5.dark-theme .subtitle,
+        .easter-theme-5.dark-theme .progress-text,
+        .easter-theme-5.dark-theme .timer-text,
+        .easter-theme-5.dark-theme .difficulty-preview-label,
+        .easter-theme-5.dark-theme .difficulty-preview-value,
+        .easter-theme-5.dark-theme .time-preview-label,
+        .easter-theme-5.dark-theme .time-preview-value,
+        .easter-theme-5.dark-theme .switch-option {
+            color: var(--easter-color-light-5) !important;
+        }
+        .easter-theme-5.dark-theme .shape-label,
+        .easter-theme-5.dark-theme .info-label,
+        .easter-theme-5.dark-theme .info-detail,        
+        .easter-theme-5.dark-theme .info-value,
+        .easter-theme-5.dark-theme .difficulty-title,
+        .easter-theme-5.dark-theme .info-value-small,
+        .easter-theme-5.dark-theme .score-detail,
+        .easter-theme-5.dark-theme .high-score-detail,
+        .easter-theme-5.dark-theme .difficulty-display,
+        .easter-theme-5.dark-theme .time-display,
+        .easter-theme-5.dark-theme .instructions h3,
+        .easter-theme-5.dark-theme .instructions ul,
+        .easter-theme-5.dark-theme .instructions li {
+            color: var(--easter-color-dark-5) !important;
         }
         
         body {
@@ -83,6 +491,33 @@
             color: var(--text-color);
             margin-bottom: 6px;
             letter-spacing: -0.02em;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+        
+        h1:hover {
+            transform: scale(1.05);
+        }
+        
+        .rainbow-emoji {
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .rainbow-emoji:hover {
+            transform: rotate(15deg) scale(1.2);
+        }
+        
+        .rainbow-emoji.active {
+            animation: rainbowSpin 1s ease;
+        }
+        
+        @keyframes rainbowSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.3); }
+            100% { transform: rotate(360deg) scale(1); }
         }
         
         .subtitle {
@@ -208,7 +643,6 @@
             color: var(--text-color);
         }
         
-    
         .shape-preview {
             width: 36px;
             height: 36px;
@@ -251,8 +685,8 @@
             user-select: none;
             transform-origin: center;
             position: relative;
-
         }
+        
         .color-cell.correct-highlight {
             animation: correctHighlightAnimation 1.5s ease-in-out forwards;
             z-index: 5;
@@ -330,11 +764,12 @@
         
         .toggle-btn1 {
             background: var(--btn1-color);
-            color:var(--btn2-color);
+            color: var(--btn2-color);
         }
+        
         .toggle-btn2 {
             background: var(--btn3-color);
-            color:var(--btn4-color);
+            color: var(--btn4-color);
         }
         
         button:hover {
@@ -394,6 +829,7 @@
             background: rgba(229, 62, 62, 0.1);
             color: var(--error-color);
         }
+        
         @keyframes correctHighlightAnimation {
             0% { 
                 transform: scale(1);
@@ -421,6 +857,7 @@
                 box-shadow: 0 0 20px rgba(56, 161, 105, 0.5);
             }
         }
+        
         @keyframes pulse {
             0% { opacity: 1; }
             50% { opacity: 0.8; }
@@ -563,7 +1000,7 @@
         }
         
         .score-detail {
-            color:#34d399;
+            color: var(--success-color);
             font-weight: 600;
         }
         
@@ -592,7 +1029,6 @@
             justify-content: center;
             gap: 6px;
         }
-        
         
         .difficulty-slider-container {
             position: relative;
@@ -769,9 +1205,9 @@
             color: var(--error-color);
             font-weight: 700;
         }
-
+        
         .high-score-detail {
-            color:#ffb300;
+            color: var(--warning-color);
             font-weight: 600;
         }
         
@@ -949,6 +1385,7 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: 16px;
             }
+            
             .switch-option {
                 white-space: nowrap;
                 text-align: center;
@@ -956,10 +1393,11 @@
                 min-width: 40px;
                 font-size: 14px;
                 line-height: 1.2;
-                display: flex; 
+                display: flex;
                 align-items: center;
                 justify-content: center;
             }
+            
             .info-box {
                 text-align: center;
                 display: flex;
@@ -968,6 +1406,7 @@
                 align-items: center;
                 min-height: 80px;
             }
+            
             .controls {
                 flex-direction: column;
                 align-items: center;
@@ -1047,7 +1486,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>色彩大师🌈</h1>
+            <h1>色彩大师<span class="rainbow-emoji" title="似乎有什么色彩会出现。。。">🌈</span></h1>
             <p class="subtitle">找出不同的那一个色块，难度会慢慢提升，试试你能拿多少分吧ヾ(≧▽≦*)o</p>
         </header>
         
@@ -1067,13 +1506,13 @@
                 <div class="info-label">当前阶段</div>
                 <div id="stage" class="info-value">1</div>
             </div>
-                        
+            
             <div class="info-box">
                 <div class="info-label">网格</div>
                 <div id="gridSize" class="info-value">2×2</div>
                 <div class="info-detail">色差: ΔE=<span id="colorDiff">15.0</span></div>
             </div>
-
+            
             <div class="info-box">
                 <div class="info-label">形状</div>
                 <div id="shapePreview" class="shape-preview"></div>
@@ -1085,19 +1524,20 @@
                 <div id="targetCount" class="info-value">1/3</div>
                 <div class="info-detail" id="targetDetail">进入下一阶段</div>
             </div>
-
+            
             <div class="info-box">
                 <div class="info-label">分数</div>
                 <div id="score" class="info-value score-detail">0</div>
                 <div class="info-detail">倍率: <span id="multiplier">1.0x</span></div>
             </div>
-
+            
             <div class="info-box">
                 <div class="info-label">历史最高</div>
                 <div id="highScore" class="info-value high-score-detail">0.00</div>
                 <div class="info-detail" id="highScoreDetail">经典模式</div>
             </div>
         </div>
+        
         <div class="stage-progress">
             <div class="progress-container">
                 <div id="progressBar" class="progress-bar"></div>
@@ -1111,6 +1551,7 @@
                 <div class="timer-text">剩余时间: <span id="timerText">00:30</span></div>
             </div>
         </div>
+        
         <div class="color-grid-container">
             <div id="colorGrid" class="color-grid" style="grid-template-columns: repeat(2, 1fr);"></div>
         </div>
@@ -1120,8 +1561,7 @@
         <div class="controls">
             <button id="startBtn">开始游戏</button>
             <button id="giveupBtn" disabled>放弃该局</button>
-        </div>
-        <div class="controls">
+
             <button id="toggleDifficultyBtn" class="toggle-btn1">难度设置</button>
             <button id="toggleRulesBtn" class="toggle-btn2">游戏规则</button>
         </div>
@@ -1173,7 +1613,7 @@
                     <input type="range" min="30" max="300" value="30" class="time-slider" id="timeSlider">
                     <div class="time-marks">
                         <span class="time-mark active" data-value="30">30秒</span>
-                        <span class="time-mark" data-value="120">2分钟</span>                        
+                        <span class="time-mark" data-value="120">2分钟</span>
                         <span class="time-mark" data-value="210">3分30秒</span>
                         <span class="time-mark" data-value="300">5分钟</span>
                     </div>
@@ -1208,45 +1648,21 @@
                 <li><strong>限时模式</strong>：在限定时间内尽可能多地找出不同色块,<strong>期间难度不会提升</strong>，时间耗尽或选错则结束，按[得分/秒]计入成绩</li>
                 <br>
                 <li>可以通过拖动条选择初始难度,最高50级,限时模式还可调节时长,<strong>记得点击"应用设置"</strong></li>
-
                 <li>点击页面最上方按钮可切换浅色/深色模式,经典模式/限时模式</li>
 
-                <li>难度41级开始为《返璞归真》,在最少的色块里,挑战极致辨识能力</li>
+                <li>难度41级开始为《返璞归真》,在最少的色块里,挑战极致辨识能力</li><br>
+                <li>试试点击标题的🌈</li>
             </ul>
         </div>
     </div>
+    
     <div class="notification" id="notification">设置已应用！</div>
-    <p style="            font-size: clamp(0.8rem, 2vw, 0.4rem);
-            color: var(--text-color-light);
-            font-weight: 400;"><br><strong>作者：</strong>L1Nzy <strong> 邮箱：</strong>lin060911@qq.com</p>
-
+    
+    <p style="font-size: clamp(0.8rem, 2vw, 0.4rem); color: var(--text-color-light); font-weight: 400;">
+        <br><strong>作者：</strong>L1Nzy <strong> 邮箱：</strong>lin060911@qq.com
+    </p>
+    
     <script>
-        const toggleDifficultyBtn = document.getElementById('toggleDifficultyBtn');
-        const difficultySection = document.getElementById('difficultySection');
-        
-        toggleDifficultyBtn.addEventListener('click', function() {
-            if (difficultySection.style.display === 'none' || difficultySection.style.display === '') {
-                difficultySection.style.display = 'block';
-                toggleDifficultyBtn.textContent = '收起难度设置';
-            } else {
-                difficultySection.style.display = 'none';
-                toggleDifficultyBtn.textContent = '难度设置';
-            }
-        });
-
-        const toggleRulesBtn = document.getElementById('toggleRulesBtn');
-        const rulesSection = document.getElementById('rulesSection');
-        
-        toggleRulesBtn.addEventListener('click', function() {
-            if (rulesSection.style.display === 'none' || rulesSection.style.display === '') {
-                rulesSection.style.display = 'block';
-                toggleRulesBtn.textContent = '收起游戏规则';
-            } else {
-                rulesSection.style.display = 'none';
-                toggleRulesBtn.textContent = '游戏规则';
-            }
-        });
-
         const gameState = {
             isPlaying: false,
             currentStage: 1,
@@ -1269,14 +1685,16 @@
             timeModeHighScore: parseFloat(localStorage.getItem('colorVisionTimeHighScore')) || 0.00,
             highScoreDetail: localStorage.getItem('colorVisionHighScoreDetail') || '经典模式',
             timeModeHighScoreDetail: localStorage.getItem('colorVisionTimeHighScoreDetail') || '0.00 分/秒',
-            gameMode: 'classic', 
-            timeLimit: 30, // 秒
+            gameMode: 'classic',
+            timeLimit: 30,
             timeLeft: 30,
             timer: null,
             isDarkTheme: localStorage.getItem('colorVisionDarkTheme') === 'true',
-            isTimeMode: localStorage.getItem('colorVisionTimeMode') === 'true'
+            isTimeMode: localStorage.getItem('colorVisionTimeMode') === 'true',
+            easterEggActive: localStorage.getItem('colorVisionEasterEggActive') === 'true',
+            easterThemeIndex: parseInt(localStorage.getItem('colorVisionEasterThemeIndex')) || 0
         };
-
+        
         const difficultyCurve = [
             { stage: 1, gridSize: 2, colorDiff: 15.0, shape: 'square', shapeRadius: 4, difficultyType: '初始难度' },
             { stage: 2, gridSize: 2, colorDiff: 14.5, shape: 'square', shapeRadius: 4, difficultyType: '色差减小' },
@@ -1328,9 +1746,8 @@
             { stage: 48, gridSize: 2, colorDiff: 1.8, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
             { stage: 49, gridSize: 2, colorDiff: 1.6, shape: 'circle', shapeRadius: 50, difficultyType: '色差减小' },
             { stage: 50, gridSize: 4, colorDiff: 1.0, shape: 'circle', shapeRadius: 50, difficultyType: '最终难度' }
-
         ];
-
+        
         const multiplierByStage = {
             1: 1.0, 2: 1.1, 3: 1.2, 4: 1.3, 5: 1.4,
             6: 1.5, 7: 1.6, 8: 1.7, 9: 1.8, 10: 2.0,
@@ -1343,13 +1760,13 @@
             41: 5.5, 42: 6.0, 43: 6.5, 44: 7.0, 45: 7.5,
             46: 8.0, 47: 8.5, 48: 9.0, 49: 9.5, 50: 10.0
         };
-
+        
         const colorSensitivityWeights = {
             r: 0.299,
             g: 0.587,
             b: 0.114
         };
-
+        
         const colorGrid = document.getElementById('colorGrid');
         const stageElement = document.getElementById('stage');
         const scoreElement = document.getElementById('score');
@@ -1368,6 +1785,7 @@
         const highScoreDetailElement = document.getElementById('highScoreDetail');
         const shapePreview = document.getElementById('shapePreview');
         const shapeLabel = document.getElementById('shapeLabel');
+        const rainbowEmoji = document.querySelector('.rainbow-emoji');
         
         const difficultySlider = document.getElementById('difficultySlider');
         const selectedDifficultyDisplay = document.getElementById('selectedDifficultyDisplay');
@@ -1397,13 +1815,96 @@
         const darkThemeBtn = document.getElementById('darkTheme');
         
         const labCache = new Map();
+        
 
+
+        function initEasterEggTheme() {
+            const body = document.body;
+            
+            body.classList.remove('easter-theme-1', 'easter-theme-2', 'easter-theme-3', 'easter-theme-4', 'easter-theme-5');
+            
+            if (gameState.easterEggActive && gameState.easterThemeIndex > 0) {
+                const themeClass = `easter-theme-${gameState.easterThemeIndex}`;
+                body.classList.add(themeClass);
+                rainbowEmoji.classList.add('active');
+                setTimeout(() => {
+                    rainbowEmoji.classList.remove('active');
+                }, 1000);
+            } else {
+                body.classList.add('theme-default');
+                rainbowEmoji.classList.remove('active');
+            }
+            
+            if (gameState.isDarkTheme) {
+                body.classList.add('dark-theme');
+                body.classList.remove('light-theme');
+            } else {
+                body.classList.add('light-theme');
+                body.classList.remove('dark-theme');
+            }
+        }
+                
+        function toggleEasterEggTheme() {
+            const body = document.body;
+            
+            if (gameState.easterThemeIndex === 0) {
+                gameState.easterEggActive = true;
+                gameState.easterThemeIndex = 1;
+            } else if (gameState.easterThemeIndex < 5) {
+                gameState.easterThemeIndex += 1;
+            } else {
+                gameState.easterEggActive = false;
+                gameState.easterThemeIndex = 0;
+            }
+            
+            localStorage.setItem('colorVisionEasterEggActive', gameState.easterEggActive.toString());
+            localStorage.setItem('colorVisionEasterThemeIndex', gameState.easterThemeIndex.toString());
+            
+            initEasterEggTheme();
+            
+            const themeNames = ['默认主题', '酷洛米', '深海柔白', '藤萝绿意', '茶花无白', '清水捣蓝'];
+            const themeName = themeNames[gameState.easterThemeIndex];
+            const message = gameState.easterThemeIndex === 0 
+                ? '回到默认主题！' 
+                : `ヾ(≧▽≦*)o切换到彩蛋主题：${themeName}！`;
+            showNotification(message);
+            
+            rainbowEmoji.classList.add('active');
+            setTimeout(() => {
+                rainbowEmoji.classList.remove('active');
+            }, 1000);
+        }
+        
+        function resetToDefaultTheme() {
+            gameState.easterEggActive = false;
+            gameState.easterThemeIndex = 0;
+            
+            localStorage.setItem('colorVisionEasterEggActive', 'false');
+            localStorage.setItem('colorVisionEasterThemeIndex', '0');
+            
+            initEasterEggTheme();
+        }
+        
+        rainbowEmoji.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleEasterEggTheme();
+        });
+        
+        document.querySelector('h1').addEventListener('click', function(e) {
+            if (e.target !== rainbowEmoji && !rainbowEmoji.contains(e.target)) {
+
+            }
+        });
         function initTheme() {
+            initEasterEggTheme();
+            
             if (gameState.isDarkTheme) {
                 document.body.classList.add('dark-theme');
+                document.body.classList.remove('light-theme');
                 darkThemeBtn.classList.add('active');
                 lightThemeBtn.classList.remove('active');
             } else {
+                document.body.classList.add('light-theme');
                 document.body.classList.remove('dark-theme');
                 lightThemeBtn.classList.add('active');
                 darkThemeBtn.classList.remove('active');
@@ -1733,50 +2234,52 @@
             scoreElement.style.textStroke = '1px white';
             document.body.appendChild(scoreElement);
 
-        createParticles(x, y, '#38a169', 20, 'score');
+            createParticles(x, y, '#38a169', 20, 'score');
 
-        const animation = scoreElement.animate([
-            { 
-                transform: 'translateY(0) scale(0.8)',
-                opacity: 0,
-                filter: 'blur(4px)'
-            },
-            { 
-                transform: 'translateY(-60px) scale(1.5)',
-                opacity: 1,
-                filter: 'blur(0px)'
-            },
-            { 
-                transform: 'translateY(-80px) scale(1.8)',
-                opacity: 0,
-                filter: 'blur(4px)'
-            }
-        ], {
-            duration: 1200,
-            easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-        });
-
-        animation.onfinish = () => {
-            scoreElement.remove();
-        };
-        }
-        function highlightCorrectCell(correctIndex) {
-        const cells = document.querySelectorAll('.color-cell');
-        if (cells.length > 0 && correctIndex >= 0 && correctIndex < cells.length) {
-            const correctCell = cells[correctIndex];
-            
-            const existingHighlights = document.querySelectorAll('.color-cell.correct-highlight');
-            existingHighlights.forEach(cell => {
-                cell.classList.remove('correct-highlight');
+            const animation = scoreElement.animate([
+                { 
+                    transform: 'translateY(0) scale(0.8)',
+                    opacity: 0,
+                    filter: 'blur(4px)'
+                },
+                { 
+                    transform: 'translateY(-60px) scale(1.5)',
+                    opacity: 1,
+                    filter: 'blur(0px)'
+                },
+                { 
+                    transform: 'translateY(-80px) scale(1.8)',
+                    opacity: 0,
+                    filter: 'blur(4px)'
+                }
+            ], {
+                duration: 1200,
+                easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
             });
-            
-            correctCell.classList.add('correct-highlight');
-            
-            setTimeout(() => {
-                correctCell.classList.remove('correct-highlight');
-            }, 3000);
+
+            animation.onfinish = () => {
+                scoreElement.remove();
+            };
         }
+        
+        function highlightCorrectCell(correctIndex) {
+            const cells = document.querySelectorAll('.color-cell');
+            if (cells.length > 0 && correctIndex >= 0 && correctIndex < cells.length) {
+                const correctCell = cells[correctIndex];
+                
+                const existingHighlights = document.querySelectorAll('.color-cell.correct-highlight');
+                existingHighlights.forEach(cell => {
+                    cell.classList.remove('correct-highlight');
+                });
+                
+                correctCell.classList.add('correct-highlight');
+                
+                setTimeout(() => {
+                    correctCell.classList.remove('correct-highlight');
+                }, 3000);
+            }
         }
+        
         function lockClick(duration = 800) {
             gameState.isClickLocked = true;
             
@@ -1890,7 +2393,7 @@
                     gameState.differentColor = generatePreciseContrastColor(gameState.baseColor, gameState.colorDiff);
                     actualDE = calculateDeltaE(gameState.baseColor, gameState.differentColor);
                     attempts++;
-                    }
+                }
                 
                 const totalCells = gameState.gridSize * gameState.gridSize;
                 gameState.differentIndex = Math.floor(Math.random() * totalCells);
@@ -1982,15 +2485,15 @@
                     }, 600);
                 }
             } else {
-            cell.classList.add('incorrect');
-            createParticles(centerX, centerY, '#e53e3e', 15, 'incorrect');
-            
-            highlightCorrectCell(gameState.differentIndex);
-            
-            setTimeout(() => {
-                endGame('incorrect');
-            }, 1000);
-        }
+                cell.classList.add('incorrect');
+                createParticles(centerX, centerY, '#e53e3e', 15, 'incorrect');
+                
+                highlightCorrectCell(gameState.differentIndex);
+                
+                setTimeout(() => {
+                    endGame('incorrect');
+                }, 1000);
+            }
         }
         
         function updateDifficultyPreview(stage) {
@@ -2242,6 +2745,42 @@
             
             applySettingsBtn.addEventListener('click', applySettings);
             
+            lightThemeBtn.addEventListener('click', function() {
+                if (gameState.isDarkTheme) {
+                    gameState.isDarkTheme = false;
+                    localStorage.setItem('colorVisionDarkTheme', 'false');
+                    
+                    if (gameState.easterEggActive) {
+                        const body = document.body;
+                        body.classList.remove('dark-theme');
+                        body.classList.add('light-theme');
+                        darkThemeBtn.classList.remove('active');
+                        lightThemeBtn.classList.add('active');
+                        showNotification('已切换到浅色撞色主题');
+                    } else {
+                        initTheme();
+                    }
+                }
+            });
+            
+            darkThemeBtn.addEventListener('click', function() {
+                if (!gameState.isDarkTheme) {
+                    gameState.isDarkTheme = true;
+                    localStorage.setItem('colorVisionDarkTheme', 'true');
+                    
+                    if (gameState.easterEggActive) {
+                        const body = document.body;
+                        body.classList.remove('light-theme');
+                        body.classList.add('dark-theme');
+                        lightThemeBtn.classList.remove('active');
+                        darkThemeBtn.classList.add('active');
+                        showNotification('已切换到深色撞色主题');
+                    } else {
+                        initTheme();
+                    }
+                }
+            });
+            
             normalModeBtn.addEventListener('click', function() {
                 if (gameState.isTimeMode) {
                     gameState.isTimeMode = false;
@@ -2260,25 +2799,35 @@
                 }
             });
             
-            lightThemeBtn.addEventListener('click', function() {
-                if (gameState.isDarkTheme) {
-                    gameState.isDarkTheme = false;
-                    localStorage.setItem('colorVisionDarkTheme', 'false');
-                    initTheme();
-                }
-            });
-            
-            darkThemeBtn.addEventListener('click', function() {
-                if (!gameState.isDarkTheme) {
-                    gameState.isDarkTheme = true;
-                    localStorage.setItem('colorVisionDarkTheme', 'true');
-                    initTheme();
-                }
-            });
-            
             updateDifficultyPreview(1);
             setTimeLimit(30);
         }
+
+        const toggleDifficultyBtn = document.getElementById('toggleDifficultyBtn');
+        const difficultySection = document.getElementById('difficultySection');
+        
+        toggleDifficultyBtn.addEventListener('click', function() {
+            if (difficultySection.style.display === 'none' || difficultySection.style.display === '') {
+                difficultySection.style.display = 'block';
+                toggleDifficultyBtn.textContent = '收起难度设置';
+            } else {
+                difficultySection.style.display = 'none';
+                toggleDifficultyBtn.textContent = '难度设置';
+            }
+        });
+
+        const toggleRulesBtn = document.getElementById('toggleRulesBtn');
+        const rulesSection = document.getElementById('rulesSection');
+        
+        toggleRulesBtn.addEventListener('click', function() {
+            if (rulesSection.style.display === 'none' || rulesSection.style.display === '') {
+                rulesSection.style.display = 'block';
+                toggleRulesBtn.textContent = '收起游戏规则';
+            } else {
+                rulesSection.style.display = 'none';
+                toggleRulesBtn.textContent = '游戏规则';
+            }
+        });
 
         startBtn.addEventListener('click', startGame);
         giveupBtn.addEventListener('click', giveUpGame);
@@ -2288,6 +2837,14 @@
             initGameMode();
             initGame();
             initDifficultySelector();
+            
+            if (gameState.easterEggActive) {
+                setTimeout(() => {
+                    const themeNames = ['默认', '酷洛米', '深海柔白', '藤萝绿意', '茶花无白', '清水捣蓝'];
+                    const themeName = themeNames[gameState.easterThemeIndex];
+                    showNotification(`当前为${themeName}，点击🌈可切换其他撞色主题`);
+                }, 1000);
+            }
         });
 
         window.addEventListener('resize', debounce(() => {
