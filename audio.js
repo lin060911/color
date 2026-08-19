@@ -44,21 +44,6 @@ const AudioFX = (function() {
                 if (muted || !ctx) return;
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
-                osc.type = 'square';
-                osc.frequency.value = 600;
-                gain.gain.setValueAtTime(0.15, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
-                osc.connect(gain);
-                gain.connect(masterGain);
-                osc.start(ctx.currentTime);
-                osc.stop(ctx.currentTime + 0.08);
-            }
-
-            function playHover() {
-                resume();
-                if (muted || !ctx) return;
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
                 osc.type = 'sine';
                 osc.frequency.value = 1200;
                 gain.gain.setValueAtTime(0.06, ctx.currentTime);
@@ -67,6 +52,12 @@ const AudioFX = (function() {
                 gain.connect(masterGain);
                 osc.start(ctx.currentTime);
                 osc.stop(ctx.currentTime + 0.05);
+            }
+
+            function playHover() {
+                resume();
+                if (muted || !ctx) return;
+                playTone(523.25, 0.03, 'sine', 0.025, 0.008);
             }
 
             function playCorrect() {
